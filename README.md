@@ -4,7 +4,7 @@
 | date        	                            | Code review 	| Progress/Tech 	|
 |-------------------------------------------|---------------|-------------------|
 | [~~02-09-2019~~](./archive/02-09-2019.md) |        	    |          	        |
-| 09-09-2019 	                            | Simon       	| Jirrine       	|
+| [~~09-09-2019~~](./archive/09-09-2019.md) | Simon       	| Jirrine       	|
 | 23-09-2019 	                            | Jos         	| Maarten       	|
 | 07-10-2019 	                            | Jirrine     	| Sybren        	|
 | 21-10-2019  	                            | Siebren     	| Simon         	|
