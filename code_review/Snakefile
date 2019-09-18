@@ -41,7 +41,9 @@ rule all:
         ['{}/f2q30_merged.bam'.format(i) for i in plate_vallues],
         ['{}/f2q30_merged_sorted.bam'.format(i) for i in plate_vallues],
         ['{}/merged_ordered.snap'.format(i) for i in plate_vallues]
-
+	
+puts "#{username} made a comment on #{post_date}. It says:\n'#{test}'\n"
+end
 rule cutadapt:
 	'''remove Nextera Index primers from the reads in the fastq files (each cell has a seperate fastq file), potentially ill swap this with TrimGalore in the future  for the nice automated FastQC option'''
     input:
