@@ -1,0 +1,165 @@
+from glob import iglob
+import pandas as pd
+
+#Folder structure for my workdir:
+#.
+#+-- plate1
+#|   +-- fastq
+#|   	+-- cell_identifier_R1.fastq.gz
+#|   	+-- cell_identifier_R2.fastq.gz
+#+-- plate2
+#|   +-- fastq
+#|   	+-- cell_identifier_R1.fastq.gz
+#|   	+-- cell_identifier_R2.fastq.gz
+#+-- plate3
+#|   +-- fastq
+#|   	+-- cell_identifier_R1.fastq.gz
+#|   	+-- cell_identifier_R2.fastq.gz
+#+-- Snakefile
+#+-- (to be implemented) conda_environment.yml
+
+r1 = iglob('*/fastq/*_R1.fastq.gz')	#I make a list of all folders (./plate1, ./plate2 etc.) containing a fastq folder containing 'cell_identifier.fastq.gz' 
+
+samples = pd.DataFrame()
+samples['r1'] = [i for i in r1]
+
+#I save the variable of the folder name as a list of 'plate' variables, while the cell_identifier is saved as a list of 'cell' variables.
+samples[['plate', 'cell']] = samples.r1.str.extract('(.*)/fastq/(.*)_R1\.fastq\.gz', expand=True)
+plate_vallues  = list(set(samples['plate'].values))	
+
+#these variables I can use in snakemake to make sure for each cell the pipeline runs correctly
+
+rule all:
+    input:
+        list(samples['plate'] + '/trim_fq/' + samples['cell'] + '_r1_trimmed.fq.gz'),
+        list(samples['plate'] + '/trim_fq/' + samples['cell'] + '_r2_trimmed.fq.gz'),
+        list(samples['plate'] + '/hisat2_hg38_mapped/' + samples['cell'] + '_f2q30.bam'),
+        list(samples['plate'] + '/hisat2_hg38_log/' + samples['cell'] + '_aln_sum.txt'),
+        list(samples['plate'] + '/cell_ID_BAMs/' + samples['cell'] + '.bam'),
+        ['{}/bam_file_list.txt'.format(i) for i in plate_vallues],
+        ['{}/f2q30_merged.bam'.format(i) for i in plate_vallues],
+        ['{}/f2q30_merged_sorted.bam'.format(i) for i in plate_vallues],
+        ['{}/merged_ordered.snap'.format(i) for i in plate_vallues]
+
+rule cutadapt:
+	'''remove Nextera Index primers from the reads in the fastq files (each cell has a seperate fastq file), potentially ill swap this with TrimGalore in the future  for the nice automated FastQC option'''
+    input:
+        r1='{plate}/fastq/{cell}_R1.fastq.gz',
+        r2='{plate}/fastq/{cell}_R2.fastq.gz'
+    output:
+        r1='{plate}/trim_fq/{cell}_r1_trimmed.fq.gz',
+        r2='{plate}/trim_fq/{cell}_r2_trimmed.fq.gz'
+    log:
+        out='logs/cutadapt/{plate}/{cell}.out',
+        err='logs/cutadapt/{plate}/{cell}.err'
+    shell:
+        ''' cutadapt \
+            -f fastq \
+            -m 25 \
+            -u -1 \
+            -U -1 \
+            -a CTGTCTCTTATACACATCTCCGAGCCCACGAGACNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG \
+            -A CTGTCTCTTATACACATCTGACGCTGCCGACGANNNNNNNNGTGTAGATCTCGGTGGTCGCCGTATCATT \
+            -o {output.r1} -p {output.r2} \
+            {input.r1} \
+            {input.r2} \
+            1> {log.out}
+            2> {log.err}
+		'''
+			
+rule hisat2:
+	'''Use hisat2 to map the reads files to the genome hg38'''
+    input:
+        r1='{plate}/trim_fq/{cell}_r1_trimmed.fq.gz',
+        r2='{plate}/trim_fq/{cell}_r2_trimmed.fq.gz'
+    output:
+        bam='{plate}/hisat2_hg38_mapped/{cell}_f2q30.bam',
+        stats='{plate}/hisat2_hg38_log/{cell}_aln_sum.txt'
+    threads: 12
+    shell:
+        ''' hisat2 \
+            -X 2000 \
+            -p {threads} \
+            --no-spliced-alignment \
+            -x /home/jsmits/TFs_epi/hisat_hg38/genome/genome \
+            -1 {input.r1} \
+            -2 {input.r2} \
+            --summary-file {output.stats} | \
+            samtools view -ShuF 4 -f 2 -q 30 - | \
+            samtools sort - -T {wildcards.cell}_tmp -o {output.bam}
+        '''
+
+rule cell_id_BAM:
+	'''add the cell ID to the Qname of the BAMfile of each cell'''
+    input:
+        '{plate}/hisat2_hg38_mapped/{cell}_f2q30.bam',
+    output:
+        '{plate}/cell_ID_BAMs/{cell}.bam'
+    script:
+        'scripts/add_cell_ID.py'
+
+rule list_bam:
+    input:
+	'''create a txt file containing a list of all BAM files.'''
+        expand('{plate}/cell_ID_BAMs/{cell}.bam', zip,
+               plate=samples['plate'],
+               cell=samples['cell'])
+    output:
+        expand('{plate}/bam_file_list.txt', plate= plate_vallues)
+    shell:
+        ''' scripts/list_bam.sh
+        '''
+        
+rule merge_plates:
+	'''Merge the bam files of individual cells (containing the cell ID in the qName of the BAM file) into one bam file per plate'''
+    input:
+        '{plate}/bam_file_list.txt'
+    output:
+        '{plate}/f2q30_merged.bam'
+    shell:
+        ''' samtools merge -b {input} {output}
+        ''' 
+        
+rule sort_plates_bam:
+	'''Sort the plate bamfiles'''
+    input:
+        '{plate}/f2q30_merged.bam'
+    output:
+        '{plate}/f2q30_merged_sorted.bam'
+    shell:
+        '''samtools sort -n {input}>{output}
+        '''
+        
+rule create_SNAP_object:
+	'''Create a snapobject for each BAM file, these snapobjects can be merged later using snaptools in R'''
+    input:
+        '{plate}/f2q30_merged_sorted.bam'
+    output:
+        '{plate}/merged_ordered.snap'
+    threads: 12
+    shell:
+        '''
+        snaptools snap-pre  \
+        --input-file={input}  \
+        --output-snap={output}  \
+        --genome-name=hg38  \
+        --genome-size="/home/jsmits/TFs_epi/HG38_chrom_sizes"  \
+        --min-mapq=30  \
+        --min-flen=0  \
+        --max-flen=1000  \
+        --keep-chrm=TRUE  \
+        --keep-single=FALSE  \
+        --keep-secondary=FALSE  \
+        --overwrite=True  \
+        --min-cov=100  \
+        --verbose=True
+        '''
+#problem: After this step I need to run manually the code:
+#
+# snaptools snap-add-bmat	\
+#	--snap-file='snapfile'	\
+#	--bin-size-list 5000 \
+#	--verbose=True\
+#
+# Since this does not create a output file but only alters the snapobject I am not sure how to implement in into the snakemake pipeline
+# after this all steps are within R.
