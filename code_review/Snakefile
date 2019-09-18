@@ -18,7 +18,8 @@ import pandas as pd
 #+-- Snakefile
 #+-- (to be implemented) conda_environment.yml
 
-r1 = iglob('*/fastq/*_R1.fastq.gz')	#I make a list of all folders (./plate1, ./plate2 etc.) containing a fastq folder containing 'cell_identifier.fastq.gz' 
+r1 = iglob('*/fastq/*_R1.fastq.gz')	
+#I make a list of all folders (./plate1, ./plate2 etc.) containing a fastq folder containing 'cell_identifier.fastq.gz' 
 
 samples = pd.DataFrame()
 samples['r1'] = [i for i in r1]
