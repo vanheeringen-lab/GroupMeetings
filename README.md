@@ -8,7 +8,7 @@
 | ~~23-09-2019~~                            | [Jos](./code_review/Snakefile)   	                  | Maarten       	|
 | ~~07-10-2019~~                            | [Jirrine](./code_review/cocitation_dataframe.py)    | Sybren        	|
 | ~~21-10-2019~~                            | Siebren     	                                      | Simon         	|
-| 04-11-2019  	                            | Quan        	                                      | Jos           	|
+| ~~04-11-2019!!                            | Quan        	                                      | Jos           	|
 | 18-11-2019 	                              | Maarten     	                                      | Siebren       	|
 | 02-12-2019  	                            | Sybren      	                                      | Quan          	|
 
