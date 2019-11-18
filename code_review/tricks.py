@@ -1,4 +1,10 @@
 """
+General Python tips & tricks
+"""
+import random
+
+
+"""
 List comprehensions
 """
 # not cool
@@ -46,6 +52,8 @@ print(f"{x=}")
 """
 Type hinting, since 3.7
 """
+
+
 def fibonacci(n: int) -> int:
     if n == 0:
         return 0
@@ -58,8 +66,6 @@ def fibonacci(n: int) -> int:
 """
 Walrus operator, since 3.8
 """
-import random
-
 # not cool
 rand = random.random()
 if rand < 10:
@@ -76,6 +82,7 @@ names = ['jan', 'eva', 'piet']
 ages = [10, 42, 63]
 cities = ['Nijmegen', 'Amsterdam', 'Giethoorn']
 
+
 class Person:
     def __init__(self, name, age, city):
         self.name = name
@@ -84,6 +91,7 @@ class Person:
 
     def whoami(self):
         print(f"My name is {self.name}, I am {self.age} years old, and I live in {self.city}.")
+
 
 persons = [Person(name, age, city) for name, age, city in zip(names, ages, cities)]
 for person in persons:
@@ -99,14 +107,18 @@ b = 'a'
 c = a
 a = b
 b = c
+print(a, b)
 
 numbers = tuple(range(100))
 first_nr = numbers[0]
 second_nr = numbers[1]
+print(first_nr, second_nr)
 
 # cool
 a, b = 'b', 'a'
 a, b = b, a
+print(a, b)
 
 numbers = tuple(range(100))
 first_nr, second_nr, *_ = numbers
+print(first_nr, second_nr)
