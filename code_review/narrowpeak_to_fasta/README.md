@@ -31,6 +31,23 @@ I find each peak (black line) and take the sequence (green line) around the summ
     <img src="https://raw.githubusercontent.com/vanheeringen-lab/GroupMeetings/master/code_review/narrowpeak_to_fasta/stagetofastq.jpg">
 </p>
 
+I get output fastas like so:
+  - *mm10-early_2cell_open.fa*
+  - *mm10-4cell_open.fa*
+  - *mm10-8cell_open.fa*
+  - *etc.*
+
+and look like this:
+
+    >lcl|chr1|peak_0
+    gttaatggcgcttggcaggccgatttatatggggcattcccgccacctattggacaggagtgtgaaccgcaCGTGTTATA
+    CGTTTTGCTAGCAATATGTC
+
+    >lcl|chr2|peak_1
+    TTCTCACATGATGTTGCCACTGGAAGTCGCCATGATGGTTCCCTGTGAAGAAAGCTTATCAAGACATTACTAATAGATAG
+    CCGTCGAGCGTAATATTTAG
+
+
 **non-peaks:**
 
 I take the complement (red lines) of the peaks (black lines), and randomly sample the same amount of
@@ -40,3 +57,16 @@ sequences as there are peaks:
 </p>
 
 See the code [here](https://github.com/vanheeringen-lab/GroupMeetings/blob/master/code_review/narrowpeak_to_fasta/peak_to_fasta.py)
+
+I get output fastas like so:
+  - *mm10_closed.fa*
+  - *danRer11_closed.fa*
+  - *etc.*
+
+    >lcl|chr10|9650
+    CCAAGCAGCAGCACTCGGGCACATTCATTATGTAAGGACGACAAGCCCCGCCCACATTAACACCCCCCCCCCCCATCCTA
+    GTTCCACCCACATTGACACC
+
+    >lcl|chr15|32389
+    ACAAACAAAACATTAATGGAATGAGTATAATAATTGTAACATTCTTAATCGATCATAACTTCCTTTAAGAGGAAGACGAT
+    ATGTTTTTGTCTTAACGTAC
