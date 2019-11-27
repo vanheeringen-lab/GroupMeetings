@@ -63,6 +63,7 @@ I get output fastas like so:
   - *danRer11_closed.fa*
   - *etc.*
 
+and look like this:
     >lcl|chr10|9650
     CCAAGCAGCAGCACTCGGGCACATTCATTATGTAAGGACGACAAGCCCCGCCCACATTAACACCCCCCCCCCCCATCCTA
     GTTCCACCCACATTGACACC
