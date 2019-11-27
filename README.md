@@ -10,7 +10,7 @@
 | ~~21-10-2019~~                            | Siebren     	                                      | Simon         	|
 | ~~04-11-2019~~                            | Quan        	                                      | Jos           	|
 | ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | Siebren       	|
-| 02-12-2019  	                            | Sybren      	                                      | Quan          	|
+| 02-12-2019  	                            | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
 
 ### Code review
 Prepare a piece of code which you think is representative/interesting or solves a difficult problem.
