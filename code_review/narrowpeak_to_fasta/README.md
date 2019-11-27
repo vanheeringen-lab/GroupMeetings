@@ -56,8 +56,6 @@ sequences as there are peaks:
     <img src="https://raw.githubusercontent.com/vanheeringen-lab/GroupMeetings/master/code_review/narrowpeak_to_fasta/stagestofastq.jpg">
 </p>
 
-See the code [here](https://github.com/vanheeringen-lab/GroupMeetings/blob/master/code_review/narrowpeak_to_fasta/peak_to_fasta.py)
-
 I get output fastas like so:
   - *mm10_closed.fa*
   - *danRer11_closed.fa*
@@ -72,3 +70,6 @@ and look like this:
     >lcl|chr15|32389
     ACAAACAAAACATTAATGGAATGAGTATAATAATTGTAACATTCTTAATCGATCATAACTTCCTTTAAGAGGAAGACGAT
     ATGTTTTTGTCTTAACGTAC
+
+
+See the code [here](https://github.com/vanheeringen-lab/GroupMeetings/blob/master/code_review/narrowpeak_to_fasta/peak_to_fasta.py)
