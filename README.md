@@ -11,6 +11,16 @@
 | ~~04-11-2019~~                            | ~~Quan~~     	                                      | ~~Jos~~        	|
 | ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | Siebren       	|
 | ~~02-12-2019~~  	                        | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
+| 16-12-2019      	                        | Jos                                                 | Sybren         	|
+| 20-01-2019      	                        | Quan                                                | Rebecca        	|
+| 03-02-2019      	                        | Niels                                               | Marlien        	|
+| 02-02-2019      	                        | Siebren                                             | Maarten        	|
+| 17-02-2019      	                        | Marlien                                             | Jos           	|
+| 02-03-2019      	                        | Simon                                               | Siebren        	|
+| 16-03-2019      	                        | Sybren                                              | Niels         	|
+| 30-03-2019      	                        | Rebecca                                             | Simon         	|
+| 13-04-2019      	                        | Maarten                                             | Quan         	  |
+
 
 ### Code review
 Prepare a piece of code which you think is representative/interesting or solves a difficult problem.
