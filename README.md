@@ -18,8 +18,8 @@
 | 02-03-2019      	                        | Simon                                               | Siebren        	|
 | 16-03-2019      	                        | Sybren                                              | Niels         	|
 | 30-03-2019      	                        | Rebecca                                             | Simon         	|
-| 06-04-2019      	                        | Marlien                                             | Quan         	  |
-| 27-04-2019      	                        | Siebren                                             | Maarten        	|
+| 06-04-2019      	                        | Maarten                                             | Quan         	  |
+| 27-04-2019      	                        | Siebren                                             | Marlien        	|
 
 
 ### Code review
