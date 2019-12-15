@@ -1,0 +1,1433 @@
+<head>
+<style>/* line 2, ../sass/_sortable.sass */
+table[data-sortable] {
+  font-size: 80%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* line 6, ../sass/_sortable.sass */
+table[data-sortable] th {
+  vertical-align: bottom;
+  font-weight: bold;
+}
+/* line 10, ../sass/_sortable.sass */
+table[data-sortable] th, table[data-sortable] td {
+  text-align: left;
+  padding: 2px;
+}
+/* line 14, ../sass/_sortable.sass */
+table[data-sortable] th:not([data-sortable="false"]) {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  cursor: pointer;
+}
+/* line 26, ../sass/_sortable.sass */
+table[data-sortable] th:after {
+  content: "";
+  visibility: hidden;
+  display: inline-block;
+  vertical-align: inherit;
+  height: 0;
+  width: 0;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent;
+  margin-right: 1px;
+  margin-left: 10px;
+  float: right;
+}
+/* line 40, ../sass/_sortable.sass */
+table[data-sortable] th[data-sorted="true"]:after {
+  visibility: visible;
+}
+/* line 43, ../sass/_sortable.sass */
+table[data-sortable] th[data-sorted-direction="descending"]:after {
+  border-top-color: inherit;
+  margin-top: 8px;
+}
+/* line 47, ../sass/_sortable.sass */
+table[data-sortable] th[data-sorted-direction="ascending"]:after {
+  border-bottom-color: inherit;
+  margin-top: 3px;
+}
+
+/* line 6, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick {
+  color: #333333;
+  background: white;
+  border: 1px solid #e0e0e0;
+}
+/* line 11, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick thead th {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
+  background-image: -webkit-linear-gradient(#ffffff, #eeeeee);
+  background-image: -moz-linear-gradient(#ffffff, #eeeeee);
+  background-image: -o-linear-gradient(#ffffff, #eeeeee);
+  background-image: linear-gradient(#ffffff, #eeeeee);
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 16, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick tbody td {
+  border-top: 1px solid #e0e0e0;
+}
+/* line 19, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick tbody > tr:nth-child(odd) > td {
+  background-color: #f9f9f9;
+}
+/* line 22, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick th[data-sorted="true"] {
+  -webkit-box-shadow: inset 1px 0 #bce8f1, inset -1px 0 #bce8f1;
+  -moz-box-shadow: inset 1px 0 #bce8f1, inset -1px 0 #bce8f1;
+  box-shadow: inset 1px 0 #bce8f1, inset -1px 0 #bce8f1;
+  color: #3a87ad;
+  background: #d9edf7;
+  border-bottom-color: #bce8f1;
+}
+/* line 28, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick th[data-sorted="true"]:first-child {
+  -webkit-box-shadow: inset -1px 0 #bce8f1;
+  -moz-box-shadow: inset -1px 0 #bce8f1;
+  box-shadow: inset -1px 0 #bce8f1;
+}
+/* line 31, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick th[data-sorted="true"]:last-child {
+  -webkit-box-shadow: inset 1px 0 #bce8f1;
+  -moz-box-shadow: inset 1px 0 #bce8f1;
+  box-shadow: inset 1px 0 #bce8f1;
+}
+/* line 34, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick th[data-sorted="true"][data-sorted-direction="descending"]:after {
+  border-top-color: #3a87ad;
+}
+/* line 37, ../sass/sortable-theme-slick.sass */
+table[data-sortable].sortable-theme-slick th[data-sorted="true"][data-sorted-direction="ascending"]:after {
+  border-bottom-color: #3a87ad;
+}
+</style>
+</head>
+<body>
+<style  type="text/css" >
+    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col3 {
+            background-color:  #c5dfec;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col3 {
+            background-color:  #d8e9f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col5 {
+            background-color:  #f0f4f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col3 {
+            background-color:  #c2ddec;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col3 {
+            background-color:  #f9c6ac;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col5 {
+            background-color:  #fcdecd;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col3 {
+            background-color:  #fcdfcf;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col4 {
+            background-color:  #ea8e70;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col5 {
+            background-color:  #ecf2f5;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col4 {
+            background-color:  #fbceb7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col5 {
+            background-color:  #fae7dc;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col4 {
+            background-color:  #fdddcb;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col3 {
+            background-color:  #fbd0b9;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col5 {
+            background-color:  #fcdecd;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col4 {
+            background-color:  #fac8af;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col4 {
+            background-color:  #cae1ee;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col5 {
+            background-color:  #facab1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col4 {
+            background-color:  #f9efe9;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col5 {
+            background-color:  #b6d7e8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col4 {
+            background-color:  #b1d5e7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col4 {
+            background-color:  #d8e9f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col5 {
+            background-color:  #edf2f5;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col3 {
+            background-color:  #db6b55;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col4 {
+            background-color:  #deebf2;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col5 {
+            background-color:  #fbceb7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col3 {
+            background-color:  #4c99c6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col4 {
+            background-color:  #81bad8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col5 {
+            background-color:  #e9f0f4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col3 {
+            background-color:  #fae7dc;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col4 {
+            background-color:  #dc6e57;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col5 {
+            background-color:  #e9f0f4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col3 {
+            background-color:  #f7b596;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col3 {
+            background-color:  #fae8de;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col4 {
+            background-color:  #f9efe9;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col5 {
+            background-color:  #9dcbe1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col4 {
+            background-color:  #cfe4ef;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col3 {
+            background-color:  #b6d7e8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col3 {
+            background-color:  #aed3e6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col4 {
+            background-color:  #e0ecf3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col5 {
+            background-color:  #f2f5f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col3 {
+            background-color:  #d1e5f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col5 {
+            background-color:  #f3f5f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col3 {
+            background-color:  #eff3f5;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col4 {
+            background-color:  #fce0d0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col5 {
+            background-color:  #c2ddec;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col3 {
+            background-color:  #fcdecd;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col4 {
+            background-color:  #fcd5bf;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col5 {
+            background-color:  #f7b596;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col5 {
+            background-color:  #d4e6f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col3 {
+            background-color:  #cfe4ef;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col5 {
+            background-color:  #d8e9f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col4 {
+            background-color:  #f8f1ed;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col5 {
+            background-color:  #d2e6f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col3 {
+            background-color:  #e6eff4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col4 {
+            background-color:  #d1e5f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col3 {
+            background-color:  #fbe6da;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col4 {
+            background-color:  #facab1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col5 {
+            background-color:  #de735c;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col3 {
+            background-color:  #f8bb9e;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col4 {
+            background-color:  #fbceb7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col3 {
+            background-color:  #f9c4a9;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col4 {
+            background-color:  #f8f3f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col3 {
+            background-color:  #fae7dc;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col5 {
+            background-color:  #fce0d0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col3 {
+            background-color:  #c0dceb;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col4 {
+            background-color:  #e1edf3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col3 {
+            background-color:  #fcdfcf;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col4 {
+            background-color:  #fbceb7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col5 {
+            background-color:  #f8bb9e;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col3 {
+            background-color:  #c7e0ed;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col5 {
+            background-color:  #bddbea;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col3 {
+            background-color:  #f7f5f4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col5 {
+            background-color:  #cae1ee;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col3 {
+            background-color:  #d5e7f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col3 {
+            background-color:  #f0f4f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col5 {
+            background-color:  #d1e5f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col3 {
+            background-color:  #fcdfcf;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col3 {
+            background-color:  #fbe6da;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col4 {
+            background-color:  #ddebf2;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col5 {
+            background-color:  #fcdecd;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col3 {
+            background-color:  #c2ddec;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col4 {
+            background-color:  #fbe3d4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col3 {
+            background-color:  #c0dceb;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col3 {
+            background-color:  #f9ede5;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col4 {
+            background-color:  #fce0d0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col5 {
+            background-color:  #f8bb9e;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col3 {
+            background-color:  #fbe5d8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col4 {
+            background-color:  #f8f1ed;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col5 {
+            background-color:  #fcdecd;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col5 {
+            background-color:  #aed3e6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col3 {
+            background-color:  #e9f0f4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col4 {
+            background-color:  #b6d7e8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col5 {
+            background-color:  #e4eef4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col3 {
+            background-color:  #a5cee3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col5 {
+            background-color:  #cce2ef;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col3 {
+            background-color:  #d2e6f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col5 {
+            background-color:  #cfe4ef;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col5 {
+            background-color:  #fddbc7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col3 {
+            background-color:  #d8e9f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col5 {
+            background-color:  #e7f0f4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col4 {
+            background-color:  #d1e5f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col3 {
+            background-color:  #e1edf3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col5 {
+            background-color:  #96c7df;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col3 {
+            background-color:  #f9ebe3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col4 {
+            background-color:  #f2f5f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col5 {
+            background-color:  #fce0d0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col4 {
+            background-color:  #8ac0db;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col5 {
+            background-color:  #d2e6f0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col3 {
+            background-color:  #f5f6f7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col5 {
+            background-color:  #c7e0ed;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col3 {
+            background-color:  #faeae1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col4 {
+            background-color:  #f2a17f;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col4 {
+            background-color:  #f5aa89;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col5 {
+            background-color:  #b6d7e8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col3 {
+            background-color:  #fbccb4;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col4 {
+            background-color:  #faeae1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col5 {
+            background-color:  #f5aa89;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col3 {
+            background-color:  #fdddcb;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col4 {
+            background-color:  #e1edf3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col5 {
+            background-color:  #fbd0b9;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col3 {
+            background-color:  #fae7dc;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col5 {
+            background-color:  #fce0d0;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col3 {
+            background-color:  #cae1ee;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col4 {
+            background-color:  #e0ecf3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col5 {
+            background-color:  #f2f5f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col3 {
+            background-color:  #d7e8f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col5 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col5 {
+            background-color:  #fdddcb;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col3 {
+            background-color:  #b3d6e8;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col5 {
+            background-color:  #cce2ef;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col3 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col5 {
+            background-color:  #d7e8f1;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col3 {
+            background-color:  #f6f7f7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col4 {
+            background-color:  #f2f5f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col5 {
+            background-color:  #87beda;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col3 {
+            background-color:  #fddbc7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col4 {
+            background-color:  #f5f6f7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col5 {
+            background-color:  #f9ebe3;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col3 {
+            background-color:  #f9eee7;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col4 {
+            background-color:  #f7f6f6;
+            color:  #000000;
+        }    #T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col5 {
+            background-color:  #d5e7f1;
+            color:  #000000;
+        }</style><table id="T_177c06ec_1f50_11ea_a87d_000e1e72da30" class="sortable-theme-slick" data-sortable><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >direct</th>        <th class="col_heading level0 col1" >indirect</th>        <th class="col_heading level0 col2" >logo</th>        <th class="col_heading level0 col3" >LSC_ab</th>        <th class="col_heading level0 col4" >LSC_159</th>        <th class="col_heading level0 col5" >LSC_AN40</th>    </tr></thead><tbody>
+                <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row0" class="row_heading level0 row0" >GM.5.0.Myb_SANT.0001</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col0" class="data row0 col0" ><div title="MYBL1,MYBL2">MYBL1,MYBL2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col1" class="data row0 col1" ><div title="MYBL1,MYBL2">MYBL1,MYBL2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col2" class="data row0 col2" ><img src="logos/GM.5.0.Myb_SANT.0001.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col3" class="data row0 col3" >-3.01</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col4" class="data row0 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row0_col5" class="data row0 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row1" class="row_heading level0 row1" >GM.5.0.GATA.0001</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col0" class="data row1 col0" ><div title="GATA,GATA1,GATA2,TAL1">GATA,GATA1,GATA2,TAL1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col1" class="data row1 col1" ><div title="CCNT2,GATA1,GATA2,TAL1">CCNT2,GATA1,GATA2,TAL1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col2" class="data row1 col2" ><img src="logos/GM.5.0.GATA.0001.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col3" class="data row1 col3" >-2.08</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col4" class="data row1 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row1_col5" class="data row1 col5" >-0.432</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row2" class="row_heading level0 row2" >GM.5.0.Homeodomain.0008</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col0" class="data row2 col0" ><div title="SIX3">SIX3</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col1" class="data row2 col1" ><div title="DOBOX4,SIX1,SIX2,SIX3,SIX6">DOBOX4,SIX1,SIX2,SIX3,SIX6</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col2" class="data row2 col2" ><img src="logos/GM.5.0.Homeodomain.0008.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col3" class="data row2 col3" >-3.15</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col4" class="data row2 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row2_col5" class="data row2 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row3" class="row_heading level0 row3" >GM.5.0.SAND.0002</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col0" class="data row3 col0" ><div title="IRC900814">IRC900814</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col1" class="data row3 col1" ><div title="ARHGEF12,SP140">ARHGEF12,SP140</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col2" class="data row3 col2" ><img src="logos/GM.5.0.SAND.0002.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col3" class="data row3 col3" >3.49</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col4" class="data row3 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row3_col5" class="data row3 col5" >2.23</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row4" class="row_heading level0 row4" >GM.5.0.C2H2_ZF.0018</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col0" class="data row4 col0" ><div title="ZNF143">ZNF143</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col1" class="data row4 col1" ><div title="ZFP143,ZFP523,ZNF143,ZNF76">ZFP143,ZFP523,ZNF143,ZNF76</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col2" class="data row4 col2" ><img src="logos/GM.5.0.C2H2_ZF.0018.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col3" class="data row4 col3" >2.15</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col4" class="data row4 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row4_col5" class="data row4 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row5" class="row_heading level0 row5" >GM.5.0.Homeodomain_Paired_box.0002</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col0" class="data row5 col0" ><div title="PAX6">PAX6</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col1" class="data row5 col1" ><div title="PAX6">PAX6</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col2" class="data row5 col2" ><img src="logos/GM.5.0.Homeodomain_Paired_box.0002.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col3" class="data row5 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col4" class="data row5 col4" >5.96</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row5_col5" class="data row5 col5" >-0.785</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row6" class="row_heading level0 row6" >GM.5.0.C2H2_ZF.0035</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col0" class="data row6 col0" ><div title="ZNF143">ZNF143</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col1" class="data row6 col1" ><div title="ZFP143,ZFP523,ZNF76">ZFP143,ZFP523,ZNF76</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col2" class="data row6 col2" ><img src="logos/GM.5.0.C2H2_ZF.0035.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col3" class="data row6 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col4" class="data row6 col4" >3.13</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row6_col5" class="data row6 col5" >1.43</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row7" class="row_heading level0 row7" >GM.5.0.Mixed.0019</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col0" class="data row7 col0" ><div title="XBP1">XBP1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col1" class="data row7 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col2" class="data row7 col2" ><img src="logos/GM.5.0.Mixed.0019.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col3" class="data row7 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col4" class="data row7 col4" >2.33</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row7_col5" class="data row7 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row8" class="row_heading level0 row8" >GM.5.0.Homeodomain.0059</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col0" class="data row8 col0" ><div title="NKX2-1,NKX2-8">NKX2-1,NKX2-8</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col1" class="data row8 col1" ><div title="NKX2-1,NKX2-3,NKX2-4,NKX2-6,NKX2-8">NKX2-1,NKX2-3,NKX2-4,NKX2-6,NK(...)</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col2" class="data row8 col2" ><img src="logos/GM.5.0.Homeodomain.0059.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col3" class="data row8 col3" >3.01</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col4" class="data row8 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row8_col5" class="data row8 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row9" class="row_heading level0 row9" >GM.5.0.C2H2_ZF.0053</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col0" class="data row9 col0" ><div title="BRCA1,ZBTB33">BRCA1,ZBTB33</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col1" class="data row9 col1" ><div title="BRCA1,CHD2,ETS1,NR3C1,ZBTB33,ZNF143">BRCA1,CHD2,ETS1,NR3C1,ZBTB33,Z(...)</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col2" class="data row9 col2" ><img src="logos/GM.5.0.C2H2_ZF.0053.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col3" class="data row9 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col4" class="data row9 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row9_col5" class="data row9 col5" >2.24</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row10" class="row_heading level0 row10" >GM.5.0.bZIP.0027</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col0" class="data row10 col0" ><div title="ATF5">ATF5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col1" class="data row10 col1" ><div title="ATF5">ATF5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col2" class="data row10 col2" ><img src="logos/GM.5.0.bZIP.0027.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col3" class="data row10 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col4" class="data row10 col4" >3.38</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row10_col5" class="data row10 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row11" class="row_heading level0 row11" >GM.5.0.Mixed.0030</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col0" class="data row11 col0" ><div title="HINFP">HINFP</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col1" class="data row11 col1" ><div title="HINFP1">HINFP1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col2" class="data row11 col2" ><img src="logos/GM.5.0.Mixed.0030.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col3" class="data row11 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col4" class="data row11 col4" >-2.87</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row11_col5" class="data row11 col5" >3.3</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row12" class="row_heading level0 row12" >GM.5.0.Homeodomain.0078</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col0" class="data row12 col0" ><div title="CRX,PITX1">CRX,PITX1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col1" class="data row12 col1" ><div title="PRRXL1">PRRXL1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col2" class="data row12 col2" ><img src="logos/GM.5.0.Homeodomain.0078.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col3" class="data row12 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col4" class="data row12 col4" >0.748</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row12_col5" class="data row12 col5" >-3.59</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row13" class="row_heading level0 row13" >GM.5.0.C2H2_ZF.0089</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col0" class="data row13 col0" ><div title="ZNF423">ZNF423</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col1" class="data row13 col1" ><div title="ZNF423">ZNF423</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col2" class="data row13 col2" ><img src="logos/GM.5.0.C2H2_ZF.0089.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col3" class="data row13 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col4" class="data row13 col4" >-3.87</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row13_col5" class="data row13 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row14" class="row_heading level0 row14" >GM.5.0.bHLH.0050</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col0" class="data row14 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col1" class="data row14 col1" ><div title="TWIST1,TWIST2">TWIST1,TWIST2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col2" class="data row14 col2" ><img src="logos/GM.5.0.bHLH.0050.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col3" class="data row14 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col4" class="data row14 col4" >-2.01</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row14_col5" class="data row14 col5" >-0.674</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row15" class="row_heading level0 row15" >GM.5.0.Unknown.0018</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col0" class="data row15 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col1" class="data row15 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col2" class="data row15 col2" ><img src="logos/GM.5.0.Unknown.0018.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col3" class="data row15 col3" >7.24</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col4" class="data row15 col4" >-1.59</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row15_col5" class="data row15 col5" >3.16</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row16" class="row_heading level0 row16" >GM.5.0.Homeodomain.0088</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col0" class="data row16 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col1" class="data row16 col1" ><div title="SIX4,SIX5">SIX4,SIX5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col2" class="data row16 col2" ><img src="logos/GM.5.0.Homeodomain.0088.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col3" class="data row16 col3" >-7.28</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col4" class="data row16 col4" >-5.65</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row16_col5" class="data row16 col5" >-0.909</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row17" class="row_heading level0 row17" >GM.5.0.Runt.0004</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col0" class="data row17 col0" ><div title="RUNX1,RUNX2">RUNX1,RUNX2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col1" class="data row17 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col2" class="data row17 col2" ><img src="logos/GM.5.0.Runt.0004.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col3" class="data row17 col3" >1.46</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col4" class="data row17 col4" >7.13</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row17_col5" class="data row17 col5" >-0.928</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row18" class="row_heading level0 row18" >GM.5.0.C2H2_ZF.0107</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col0" class="data row18 col0" ><div title="ZNF524">ZNF524</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col1" class="data row18 col1" ><div title="ZFP524,ZNF524">ZFP524,ZNF524</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col2" class="data row18 col2" ><img src="logos/GM.5.0.C2H2_ZF.0107.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col3" class="data row18 col3" >4.37</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col4" class="data row18 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row18_col5" class="data row18 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row19" class="row_heading level0 row19" >GM.5.0.Unknown.0021</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col0" class="data row19 col0" ><div title="SPZ1">SPZ1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col1" class="data row19 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col2" class="data row19 col2" ><img src="logos/GM.5.0.Unknown.0021.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col3" class="data row19 col3" >1.31</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col4" class="data row19 col4" >0.724</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row19_col5" class="data row19 col5" >-4.58</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row20" class="row_heading level0 row20" >GM.5.0.Nuclear_receptor.0053</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col0" class="data row20 col0" ><div title="RARA,RARB,RARG">RARA,RARB,RARG</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col1" class="data row20 col1" ><div title="RARA,RARB,RARG">RARA,RARB,RARG</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col2" class="data row20 col2" ><img src="logos/GM.5.0.Nuclear_receptor.0053.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col3" class="data row20 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col4" class="data row20 col4" >-2.6</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row20_col5" class="data row20 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row21" class="row_heading level0 row21" >GM.5.0.bZIP.0047</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col0" class="data row21 col0" ><div title="MAFA">MAFA</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col1" class="data row21 col1" ><div title="MAF,MAFA,NRL">MAF,MAFA,NRL</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col2" class="data row21 col2" ><img src="logos/GM.5.0.bZIP.0047.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col3" class="data row21 col3" >-3.61</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col4" class="data row21 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row21_col5" class="data row21 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row22" class="row_heading level0 row22" >GM.5.0.Nuclear_receptor.0058</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col0" class="data row22 col0" ><div title="NR3C1">NR3C1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col1" class="data row22 col1" ><div title="NR3C2,PGR">NR3C2,PGR</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col2" class="data row22 col2" ><img src="logos/GM.5.0.Nuclear_receptor.0058.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col3" class="data row22 col3" >-3.97</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col4" class="data row22 col4" >-1.52</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row22_col5" class="data row22 col5" >-0.366</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row23" class="row_heading level0 row23" >GM.5.0.C2H2_ZF.0140</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col0" class="data row23 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col1" class="data row23 col1" ><div title="ZNF274">ZNF274</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col2" class="data row23 col2" ><img src="logos/GM.5.0.C2H2_ZF.0140.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col3" class="data row23 col3" >-2.58</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col4" class="data row23 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row23_col5" class="data row23 col5" >-0.245</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row24" class="row_heading level0 row24" >GM.5.0.Homeodomain.0130</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col0" class="data row24 col0" ><div title="NKX3-2">NKX3-2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col1" class="data row24 col1" ><div title="NKX2-3,NKX3-2">NKX2-3,NKX3-2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col2" class="data row24 col2" ><img src="logos/GM.5.0.Homeodomain.0130.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col3" class="data row24 col3" >-0.505</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col4" class="data row24 col4" >2.05</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row24_col5" class="data row24 col5" >-3.16</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row25" class="row_heading level0 row25" >GM.5.0.Paired_box.0009</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col0" class="data row25 col0" ><div title="PAX1,PAX2,PAX5,PAX9">PAX1,PAX2,PAX5,PAX9</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col1" class="data row25 col1" ><div title="PAX1,PAX2,PAX5,PAX8,PAX9">PAX1,PAX2,PAX5,PAX8,PAX9</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col2" class="data row25 col2" ><img src="logos/GM.5.0.Paired_box.0009.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col3" class="data row25 col3" >2.27</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col4" class="data row25 col4" >0.0742</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row25_col5" class="data row25 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row26" class="row_heading level0 row26" >GM.5.0.RFX.0007</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col0" class="data row26 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col1" class="data row26 col1" ><div title="RFX5">RFX5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col2" class="data row26 col2" ><img src="logos/GM.5.0.RFX.0007.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col3" class="data row26 col3" >0.0142</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col4" class="data row26 col4" >2.88</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row26_col5" class="data row26 col5" >4.29</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row27" class="row_heading level0 row27" >GM.5.0.C2H2_ZF.0153</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col0" class="data row27 col0" ><div title="PRDM1">PRDM1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col1" class="data row27 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col2" class="data row27 col2" ><img src="logos/GM.5.0.C2H2_ZF.0153.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col3" class="data row27 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col4" class="data row27 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row27_col5" class="data row27 col5" >-2.38</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row28" class="row_heading level0 row28" >GM.5.0.Forkhead.0037</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col0" class="data row28 col0" ><div title="FOXO1,FOXO3,FOXO4,FOXO6">FOXO1,FOXO3,FOXO4,FOXO6</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col1" class="data row28 col1" ><div title="FOXO1,FOXO3,FOXO4,FOXO6">FOXO1,FOXO3,FOXO4,FOXO6</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col2" class="data row28 col2" ><img src="logos/GM.5.0.Forkhead.0037.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col3" class="data row28 col3" >-2.65</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col4" class="data row28 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row28_col5" class="data row28 col5" >-2.07</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row29" class="row_heading level0 row29" >GM.5.0.Mixed.0063</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col0" class="data row29 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col1" class="data row29 col1" ><div title="BCL3,NFKB1">BCL3,NFKB1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col2" class="data row29 col2" ><img src="logos/GM.5.0.Mixed.0063.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col3" class="data row29 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col4" class="data row29 col4" >0.57</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row29_col5" class="data row29 col5" >-2.44</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row30" class="row_heading level0 row30" >GM.5.0.GATA.0017</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col0" class="data row30 col0" ><div title="GATA5">GATA5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col1" class="data row30 col1" ><div title="GATA2,GATA5">GATA2,GATA5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col2" class="data row30 col2" ><img src="logos/GM.5.0.GATA.0017.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col3" class="data row30 col3" >-1.17</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col4" class="data row30 col4" >-2.58</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row30_col5" class="data row30 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row31" class="row_heading level0 row31" >GM.5.0.Zinc_cluster.0001</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col0" class="data row31 col0" ><div title="SEF1">SEF1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col1" class="data row31 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col2" class="data row31 col2" ><img src="logos/GM.5.0.Zinc_cluster.0001.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col3" class="data row31 col3" >1.5</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col4" class="data row31 col4" >3.29</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row31_col5" class="data row31 col5" >6.92</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row32" class="row_heading level0 row32" >GM.5.0.Unknown.0065</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col0" class="data row32 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col1" class="data row32 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col2" class="data row32 col2" ><img src="logos/GM.5.0.Unknown.0065.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col3" class="data row32 col3" >4.03</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col4" class="data row32 col4" >3.14</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row32_col5" class="data row32 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row33" class="row_heading level0 row33" >GM.5.0.Mixed.0065</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col0" class="data row33 col0" ><div title="PAX4">PAX4</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col1" class="data row33 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col2" class="data row33 col2" ><img src="logos/GM.5.0.Mixed.0065.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col3" class="data row33 col3" >3.65</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col4" class="data row33 col4" >0.351</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row33_col5" class="data row33 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row34" class="row_heading level0 row34" >GM.5.0.Nuclear_receptor.0087</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col0" class="data row34 col0" ><div title="THRB">THRB</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col1" class="data row34 col1" ><div title="THRA,THRB">THRA,THRB</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col2" class="data row34 col2" ><img src="logos/GM.5.0.Nuclear_receptor.0087.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col3" class="data row34 col3" >1.44</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col4" class="data row34 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row34_col5" class="data row34 col5" >2.03</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row35" class="row_heading level0 row35" >GM.5.0.STAT.0016</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col0" class="data row35 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col1" class="data row35 col1" ><div title="STAT1,STAT2">STAT1,STAT2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col2" class="data row35 col2" ><img src="logos/GM.5.0.STAT.0016.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col3" class="data row35 col3" >-3.28</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col4" class="data row35 col4" >-1.44</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row35_col5" class="data row35 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row36" class="row_heading level0 row36" >GM.5.0.SMAD.0015</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col0" class="data row36 col0" ><div title="SMAD4">SMAD4</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col1" class="data row36 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col2" class="data row36 col2" ><img src="logos/GM.5.0.SMAD.0015.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col3" class="data row36 col3" >2.13</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col4" class="data row36 col4" >3.11</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row36_col5" class="data row36 col5" >4</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row37" class="row_heading level0 row37" >GM.5.0.Mixed.0072</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col0" class="data row37 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col1" class="data row37 col1" ><div title="POLR2A,RDBP,TAF1,TBP">POLR2A,RDBP,TAF1,TBP</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col2" class="data row37 col2" ><img src="logos/GM.5.0.Mixed.0072.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col3" class="data row37 col3" >-2.94</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col4" class="data row37 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row37_col5" class="data row37 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row38" class="row_heading level0 row38" >GM.5.0.Unknown.0084</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col0" class="data row38 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col1" class="data row38 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col2" class="data row38 col2" ><img src="logos/GM.5.0.Unknown.0084.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col3" class="data row38 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col4" class="data row38 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row38_col5" class="data row38 col5" >-3.3</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row39" class="row_heading level0 row39" >GM.5.0.SAND.0007</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col0" class="data row39 col0" ><div title="AIRE">AIRE</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col1" class="data row39 col1" ><div title="AIRE">AIRE</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col2" class="data row39 col2" ><img src="logos/GM.5.0.SAND.0007.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col3" class="data row39 col3" >0.169</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col4" class="data row39 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row39_col5" class="data row39 col5" >-2.82</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row40" class="row_heading level0 row40" >GM.5.0.bHLH.0087</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col0" class="data row40 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col1" class="data row40 col1" ><div title="SCX,SCXA,SCXB,TCF15">SCX,SCXA,SCXB,TCF15</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col2" class="data row40 col2" ><img src="logos/GM.5.0.bHLH.0087.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col3" class="data row40 col3" >-2.25</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col4" class="data row40 col4" >0.00232</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row40_col5" class="data row40 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row41" class="row_heading level0 row41" >GM.5.0.Mixed.0075</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col0" class="data row41 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col1" class="data row41 col1" ><div title="NANOG,POU5F1">NANOG,POU5F1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col2" class="data row41 col2" ><img src="logos/GM.5.0.Mixed.0075.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col3" class="data row41 col3" >-0.472</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col4" class="data row41 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row41_col5" class="data row41 col5" >-2.55</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row42" class="row_heading level0 row42" >GM.5.0.bHLH.0088</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col0" class="data row42 col0" ><div title="AHR">AHR</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col1" class="data row42 col1" ><div title="AHR,AHRR">AHR,AHRR</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col2" class="data row42 col2" ><img src="logos/GM.5.0.bHLH.0088.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col3" class="data row42 col3" >2.19</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col4" class="data row42 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row42_col5" class="data row42 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row43" class="row_heading level0 row43" >GM.5.0.Unknown.0091</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col0" class="data row43 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col1" class="data row43 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col2" class="data row43 col2" ><img src="logos/GM.5.0.Unknown.0091.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col3" class="data row43 col3" >1.53</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col4" class="data row43 col4" >-1.77</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row43_col5" class="data row43 col5" >2.24</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row44" class="row_heading level0 row44" >GM.5.0.CUT_Homeodomain.0009</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col0" class="data row44 col0" ><div title="CUX1">CUX1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col1" class="data row44 col1" ><div title="CUX2">CUX2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col2" class="data row44 col2" ><img src="logos/GM.5.0.CUT_Homeodomain.0009.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col3" class="data row44 col3" >-3.12</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col4" class="data row44 col4" >1.84</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row44_col5" class="data row44 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row45" class="row_heading level0 row45" >GM.5.0.Homeodomain_POU.0014</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col0" class="data row45 col0" ><div title="POU2F1">POU2F1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col1" class="data row45 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col2" class="data row45 col2" ><img src="logos/GM.5.0.Homeodomain_POU.0014.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col3" class="data row45 col3" >-3.19</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col4" class="data row45 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row45_col5" class="data row45 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row46" class="row_heading level0 row46" >GM.5.0.SMAD.0017</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col0" class="data row46 col0" ><div title="SMAD3">SMAD3</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col1" class="data row46 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col2" class="data row46 col2" ><img src="logos/GM.5.0.SMAD.0017.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col3" class="data row46 col3" >0.916</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col4" class="data row46 col4" >2</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row46_col5" class="data row46 col5" >4.02</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row47" class="row_heading level0 row47" >GM.5.0.bZIP.0077</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col0" class="data row47 col0" ><div title="ATF4">ATF4</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col1" class="data row47 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col2" class="data row47 col2" ><img src="logos/GM.5.0.bZIP.0077.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col3" class="data row47 col3" >1.61</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col4" class="data row47 col4" >0.583</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row47_col5" class="data row47 col5" >2.23</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row48" class="row_heading level0 row48" >GM.5.0.STAT.0019</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col0" class="data row48 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col1" class="data row48 col1" ><div title="STAT1,STAT3">STAT1,STAT3</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col2" class="data row48 col2" ><img src="logos/GM.5.0.STAT.0019.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col3" class="data row48 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col4" class="data row48 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row48_col5" class="data row48 col5" >-3.97</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row49" class="row_heading level0 row49" >GM.5.0.Unknown.0105</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col0" class="data row49 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col1" class="data row49 col1" ><div title="GTF3C2,POLR3A,POLR3G">GTF3C2,POLR3A,POLR3G</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col2" class="data row49 col2" ><img src="logos/GM.5.0.Unknown.0105.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col3" class="data row49 col3" >-0.906</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col4" class="data row49 col4" >-3.6</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row49_col5" class="data row49 col5" >-1.23</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row50" class="row_heading level0 row50" >GM.5.0.Unknown.0106</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col0" class="data row50 col0" ><div title="CBX5">CBX5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col1" class="data row50 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col2" class="data row50 col2" ><img src="logos/GM.5.0.Unknown.0106.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col3" class="data row50 col3" >-4.31</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col4" class="data row50 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row50_col5" class="data row50 col5" >-2.76</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row51" class="row_heading level0 row51" >GM.5.0.Unknown.0110</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col0" class="data row51 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col1" class="data row51 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col2" class="data row51 col2" ><img src="logos/GM.5.0.Unknown.0110.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col3" class="data row51 col3" >-2.43</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col4" class="data row51 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row51_col5" class="data row51 col5" >-2.62</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row52" class="row_heading level0 row52" >GM.5.0.Prospero.0001</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col0" class="data row52 col0" ><div title="PROX1">PROX1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col1" class="data row52 col1" ><div title="PROX1">PROX1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col2" class="data row52 col2" ><img src="logos/GM.5.0.Prospero.0001.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col3" class="data row52 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col4" class="data row52 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row52_col5" class="data row52 col5" >2.56</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row53" class="row_heading level0 row53" >GM.5.0.Unknown.0117</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col0" class="data row53 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col1" class="data row53 col1" ><div title="BCL3">BCL3</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col2" class="data row53 col2" ><img src="logos/GM.5.0.Unknown.0117.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col3" class="data row53 col3" >-2</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col4" class="data row53 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row53_col5" class="data row53 col5" >-0.997</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row54" class="row_heading level0 row54" >GM.5.0.Unknown.0119</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col0" class="data row54 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col1" class="data row54 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col2" class="data row54 col2" ><img src="logos/GM.5.0.Unknown.0119.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col3" class="data row54 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col4" class="data row54 col4" >-2.56</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row54_col5" class="data row54 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row55" class="row_heading level0 row55" >GM.5.0.bZIP.0082</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col0" class="data row55 col0" ><div title="JUN">JUN</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col1" class="data row55 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col2" class="data row55 col2" ><img src="logos/GM.5.0.bZIP.0082.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col3" class="data row55 col3" >-1.41</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col4" class="data row55 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row55_col5" class="data row55 col5" >-4.92</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row56" class="row_heading level0 row56" >GM.5.0.Mixed.0084</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col0" class="data row56 col0" ><div title="MBD1">MBD1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col1" class="data row56 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col2" class="data row56 col2" ><img src="logos/GM.5.0.Mixed.0084.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col3" class="data row56 col3" >1.01</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col4" class="data row56 col4" >-0.317</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row56_col5" class="data row56 col5" >2.04</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row57" class="row_heading level0 row57" >GM.5.0.Nuclear_receptor.0115</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col0" class="data row57 col0" ><div title="NR2F6">NR2F6</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col1" class="data row57 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col2" class="data row57 col2" ><img src="logos/GM.5.0.Nuclear_receptor.0115.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col3" class="data row57 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col4" class="data row57 col4" >-5.31</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row57_col5" class="data row57 col5" >-2.45</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row58" class="row_heading level0 row58" >GM.5.0.Rel.0023</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col0" class="data row58 col0" ><div title="NFKB2">NFKB2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col1" class="data row58 col1" ><div title="NFKB2">NFKB2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col2" class="data row58 col2" ><img src="logos/GM.5.0.Rel.0023.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col3" class="data row58 col3" >-0.19</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col4" class="data row58 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row58_col5" class="data row58 col5" >-2.98</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row59" class="row_heading level0 row59" >GM.5.0.Homeodomain.0168</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col0" class="data row59 col0" ><div title="NKX2-5">NKX2-5</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col1" class="data row59 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col2" class="data row59 col2" ><img src="logos/GM.5.0.Homeodomain.0168.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col3" class="data row59 col3" >1.13</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col4" class="data row59 col4" >5.27</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row59_col5" class="data row59 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row60" class="row_heading level0 row60" >GM.5.0.C2H2_ZF.0227</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col0" class="data row60 col0" ><div title="ZNF317">ZNF317</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col1" class="data row60 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col2" class="data row60 col2" ><img src="logos/GM.5.0.C2H2_ZF.0227.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col3" class="data row60 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col4" class="data row60 col4" >4.78</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row60_col5" class="data row60 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row61" class="row_heading level0 row61" >GM.5.0.C2H2_ZF.0229</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col0" class="data row61 col0" ><div title="ZNF708">ZNF708</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col1" class="data row61 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col2" class="data row61 col2" ><img src="logos/GM.5.0.C2H2_ZF.0229.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col3" class="data row61 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col4" class="data row61 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row61_col5" class="data row61 col5" >-3.61</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row62" class="row_heading level0 row62" >GM.5.0.Unknown.0140</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col0" class="data row62 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col1" class="data row62 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col2" class="data row62 col2" ><img src="logos/GM.5.0.Unknown.0140.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col3" class="data row62 col3" >3.22</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col4" class="data row62 col4" >1.14</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row62_col5" class="data row62 col5" >4.85</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row63" class="row_heading level0 row63" >GM.5.0.MBD.0003</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col0" class="data row63 col0" ><div title="MBD2">MBD2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col1" class="data row63 col1" ><div title="MBD2">MBD2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col2" class="data row63 col2" ><img src="logos/GM.5.0.MBD.0003.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col3" class="data row63 col3" >2.35</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col4" class="data row63 col4" >-1.45</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row63_col5" class="data row63 col5" >3.02</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row64" class="row_heading level0 row64" >GM.5.0.bZIP.0089</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col0" class="data row64 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col1" class="data row64 col1" ><div title="ATF3">ATF3</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col2" class="data row64 col2" ><img src="logos/GM.5.0.bZIP.0089.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col3" class="data row64 col3" >1.44</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col4" class="data row64 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row64_col5" class="data row64 col5" >2.08</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row65" class="row_heading level0 row65" >GM.5.0.Forkhead.0055</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col0" class="data row65 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col1" class="data row65 col1" ><div title="FOXD2,FOXD3,FOXD4,FOXD4L1,FOXD4L3,FOXD4L5,FOXD4L6,FOXE1,FOXE3,FOXF1A,FOXF2,FOXL2,FOXQ1,FOXS1">FOXD2,FOXD3,FOXD4,FOXD4L1,FOXD(...)</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col2" class="data row65 col2" ><img src="logos/GM.5.0.Forkhead.0055.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col3" class="data row65 col3" >-2.82</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col4" class="data row65 col4" >-1.58</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row65_col5" class="data row65 col5" >-0.358</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row66" class="row_heading level0 row66" >GM.5.0.Homeodomain.0188</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col0" class="data row66 col0" ><div title="HOXA9,MEIS1">HOXA9,MEIS1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col1" class="data row66 col1" ><div title="HOXA6,HOXB9,HOXC9,NP_032296.2">HOXA6,HOXB9,HOXC9,NP_032296.2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col2" class="data row66 col2" ><img src="logos/GM.5.0.Homeodomain.0188.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col3" class="data row66 col3" >-2.15</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col4" class="data row66 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row66_col5" class="data row66 col5" >0</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row67" class="row_heading level0 row67" >GM.5.0.bHLH.0132</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col0" class="data row67 col0" ><div title="EBF1">EBF1</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col1" class="data row67 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col2" class="data row67 col2" ><img src="logos/GM.5.0.bHLH.0132.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col3" class="data row67 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col4" class="data row67 col4" >0.0398</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row67_col5" class="data row67 col5" >2.38</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row68" class="row_heading level0 row68" >GM.5.0.Unknown.0178</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col0" class="data row68 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col1" class="data row68 col1" ><div title="EZH2">EZH2</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col2" class="data row68 col2" ><img src="logos/GM.5.0.Unknown.0178.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col3" class="data row68 col3" >-3.78</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col4" class="data row68 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row68_col5" class="data row68 col5" >-2.78</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row69" class="row_heading level0 row69" >GM.5.0.Unknown.0185</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col0" class="data row69 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col1" class="data row69 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col2" class="data row69 col2" ><img src="logos/GM.5.0.Unknown.0185.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col3" class="data row69 col3" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col4" class="data row69 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row69_col5" class="data row69 col5" >-2.14</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row70" class="row_heading level0 row70" >GM.5.0.Unknown.0199</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col0" class="data row70 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col1" class="data row70 col1" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col2" class="data row70 col2" ><img src="logos/GM.5.0.Unknown.0199.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col3" class="data row70 col3" >-0.0197</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col4" class="data row70 col4" >-0.343</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row70_col5" class="data row70 col5" >-5.43</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row71" class="row_heading level0 row71" >GM.5.0.C2H2_ZF.0314</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col0" class="data row71 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col1" class="data row71 col1" ><div title="KLF2,KLF3,KLF5,KLF6,KLF7">KLF2,KLF3,KLF5,KLF6,KLF7</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col2" class="data row71 col2" ><img src="logos/GM.5.0.C2H2_ZF.0314.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col3" class="data row71 col3" >2.56</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col4" class="data row71 col4" >-0.17</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row71_col5" class="data row71 col5" >1.07</td>
+            </tr>
+            <tr>
+                        <th id="T_177c06ec_1f50_11ea_a87d_000e1e72da30level0_row72" class="row_heading level0 row72" >GM.5.0.Unknown.0206</th>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col0" class="data row72 col0" ><div title=""></div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col1" class="data row72 col1" ><div title="GTF3C2,POLR3A,POLR3G">GTF3C2,POLR3A,POLR3G</div></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col2" class="data row72 col2" ><img src="logos/GM.5.0.Unknown.0206.png" height=40/></td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col3" class="data row72 col3" >0.858</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col4" class="data row72 col4" >0</td>
+                        <td id="T_177c06ec_1f50_11ea_a87d_000e1e72da30row72_col5" class="data row72 col5" >-2.27</td>
+            </tr>
+    </tbody></table><script>/*! sortable.js 0.8.0 */
+(function(){var a,b,c,d,e,f,g;a="table[data-sortable]",d=/^-?[£$¤]?[\d,.]+%?$/,g=/^\s+|\s+$/g,c=["click"],f="ontouchstart"in document.documentElement,f&&c.push("touchstart"),b=function(a,b,c){return null!=a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent("on"+b,c)},e={init:function(b){var c,d,f,g,h;for(null==b&&(b={}),null==b.selector&&(b.selector=a),d=document.querySelectorAll(b.selector),h=[],f=0,g=d.length;g>f;f++)c=d[f],h.push(e.initTable(c));return h},initTable:function(a){var b,c,d,f,g,h;if(1===(null!=(h=a.tHead)?h.rows.length:void 0)&&"true"!==a.getAttribute("data-sortable-initialized")){for(a.setAttribute("data-sortable-initialized","true"),d=a.querySelectorAll("th"),b=f=0,g=d.length;g>f;b=++f)c=d[b],"false"!==c.getAttribute("data-sortable")&&e.setupClickableTH(a,c,b);return a}},setupClickableTH:function(a,d,f){var g,h,i,j,k,l;for(i=e.getColumnType(a,f),h=function(b){var c,g,h,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D;if(b.handled===!0)return!1;for(b.handled=!0,m="true"===this.getAttribute("data-sorted"),n=this.getAttribute("data-sorted-direction"),h=m?"ascending"===n?"descending":"ascending":i.defaultSortDirection,p=this.parentNode.querySelectorAll("th"),s=0,w=p.length;w>s;s++)d=p[s],d.setAttribute("data-sorted","false"),d.removeAttribute("data-sorted-direction");if(this.setAttribute("data-sorted","true"),this.setAttribute("data-sorted-direction",h),o=a.tBodies[0],l=[],m){for(D=o.rows,v=0,z=D.length;z>v;v++)g=D[v],l.push(g);for(l.reverse(),B=0,A=l.length;A>B;B++)k=l[B],o.appendChild(k)}else{for(r=null!=i.compare?i.compare:function(a,b){return b-a},c=function(a,b){return a[0]===b[0]?a[2]-b[2]:i.reverse?r(b[0],a[0]):r(a[0],b[0])},C=o.rows,j=t=0,x=C.length;x>t;j=++t)k=C[j],q=e.getNodeValue(k.cells[f]),null!=i.comparator&&(q=i.comparator(q)),l.push([q,k,j]);for(l.sort(c),u=0,y=l.length;y>u;u++)k=l[u],o.appendChild(k[1])}return"function"==typeof window.CustomEvent&&"function"==typeof a.dispatchEvent?a.dispatchEvent(new CustomEvent("Sortable.sorted",{bubbles:!0})):void 0},l=[],j=0,k=c.length;k>j;j++)g=c[j],l.push(b(d,g,h));return l},getColumnType:function(a,b){var c,d,f,g,h,i,j,k,l,m,n;if(d=null!=(l=a.querySelectorAll("th")[b])?l.getAttribute("data-sortable-type"):void 0,null!=d)return e.typesObject[d];for(m=a.tBodies[0].rows,h=0,j=m.length;j>h;h++)for(c=m[h],f=e.getNodeValue(c.cells[b]),n=e.types,i=0,k=n.length;k>i;i++)if(g=n[i],g.match(f))return g;return e.typesObject.alpha},getNodeValue:function(a){var b;return a?(b=a.getAttribute("data-value"),null!==b?b:"undefined"!=typeof a.innerText?a.innerText.replace(g,""):a.textContent.replace(g,"")):""},setupTypes:function(a){var b,c,d,f;for(e.types=a,e.typesObject={},f=[],c=0,d=a.length;d>c;c++)b=a[c],f.push(e.typesObject[b.name]=b);return f}},e.setupTypes([{name:"numeric",defaultSortDirection:"descending",match:function(a){return a.match(d)},comparator:function(a){return parseFloat(a.replace(/[^0-9.-]/g,""),10)||0}},{name:"date",defaultSortDirection:"ascending",reverse:!0,match:function(a){return!isNaN(Date.parse(a))},comparator:function(a){return Date.parse(a)||0}},{name:"alpha",defaultSortDirection:"ascending",match:function(){return!0},compare:function(a,b){return a.localeCompare(b)}}]),setTimeout(e.init,0),"function"==typeof define&&define.amd?define(function(){return e}):"undefined"!=typeof exports?module.exports=e:window.Sortable=e}).call(this);</script>
+</body>

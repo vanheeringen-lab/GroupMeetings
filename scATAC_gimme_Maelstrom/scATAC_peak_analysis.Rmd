@@ -1,0 +1,184 @@
+---
+title: "scATAC_motifs.Rmd"
+author: "Jsmits"
+date: "December 11, 2019"
+output: html_document
+---
+Conda env: P3_SnapATAC
+Load SnapATAC library and select the output directory where all output figures are printed to.
+```{r setup, include=FALSE}
+#library(devtools)
+#install_github("r3fang/SnapATAC")
+#updated on 06/12/2019
+
+library('SnapATAC')
+home_dir <- '/home/jsmits/Ares_scATAC/'
+figure_dir <- paste(home_dir,'/output_figures/LSC_AN40_subset/',sep="")
+```
+
+Load the peak matrix containing SnapObject (S4 factor) from the clustering&peak calling stages
+Each column is a cell and each row a peak.
+```{r}
+x.sp = readRDS("/home/jsmits/Ares_scATAC/psuedo_bulk_LSC_AN40_subset/LSC_AN40.snap.rds")
+x.sp = makeBinary(x.sp, mat="pmat")
+x.sp@pmat
+```
+
+Find the most interseting peaks for Gimme Maelstrom:
+
+step 1. Generate normalized peak-count table
+step 2. Select the most interesting peaks:
+    a. select highly variable peaks based on stdev
+    b. use SnapATAC's  inbuild diff peak analysis magic.
+
+Output from previous SnapATAC analysis consists of narrowPeak files in:
++-wd
++-psuedo_bulk_LSC_AN40_subset
+    +-LSC_159_peaks.narrowPeak
+    +-LSC_AN40_peaks.narrowPeak
+    +-LSC_ab_peaks.narrowPeak
+
+load the peakfiles containing peaks from each subcluster:
+```{r}
+library('GenomicRanges')
+setwd(paste(home_dir,"/psuedo_bulk_LSC_AN40_subset",sep=""))
+
+
+i = 0
+file_list <- c()
+for (cluster in unique(x.sp@cluster)) {
+  i <- i + 1
+  file = paste(paste(home_dir,"psuedo_bulk_LSC_AN40_subset/",sep=""),cluster,"_peaks.narrowPeak", sep="")
+  file_list[i] <- file
+}
+
+peak.list = lapply(as.list(file_list), function(x) read.table(x))
+
+#remove random b'x' that pops up in front of all seqnames #SnapATAC magic
+peak.list = lapply(peak.list, function(x) GRanges( sub('.$','',sub('..','',(x[,1]))), IRanges(x[,2], x[,3]), mcols = setNames(data.frame(x[,10], stringsAsFactors = FALSE),'peak_summit')))
+
+peaks.gr =suppressWarnings(Reduce(c, peak.list))
+```
+
+Generate a peak_summit_matrix containing all the peak summits of 200bp width.
+Load the name & locations of each peak.
+```{r}
+peak_mx <- as.data.frame(
+  paste(
+    paste(
+      as.data.frame(peaks.gr@seqnames)[,1],
+      as.data.frame(peaks.gr@ranges)[,1],
+      sep =":"),
+    as.data.frame(peaks.gr@ranges)[,2],
+    sep='-'))
+
+#Calculate the location of each summit (based on the summit location from the metadata)
+summit_width <- 200
+
+peak_mx$summit <-
+  paste(
+    paste(
+      as.data.frame(peaks.gr@seqnames)[,1],
+    (as.data.frame(peaks.gr@ranges)[,1] + as.data.frame(peaks.gr@elementMetadata)[,1] -(summit_width/2)),
+      sep =":"),(as.data.frame(peaks.gr@ranges)[,1] + as.data.frame(peaks.gr@elementMetadata)[,1]) +(summit_width/2),
+      sep ="-")
+
+colnames(peak_mx) <- c('peak','summit')
+peak_mx <- gsub("chr","",peak_mx$summit)
+peak_mx <- as.data.frame(peak_mx)
+```
+
+Calculate the counts/total counts of the samples per 200bp peak per cluster (1count = max 1 cell). Log2 normalize that value and scale it.
+
+Questions: Does it make sense to first log2 normalize after which I scale the data? Or should I only do on or the other?
+```{r}
+i <- 2 #for skipping over the first column
+for (cluster in unique(x.sp@cluster)) {
+  #summ all the reads from all cells (colSums) from each cluster per peak in pmat. 
+  reads_column <- as.data.frame(as.matrix(x.sp[x.sp@cluster == cluster]@pmat))
+  reads_column <- colMeans(reads_column)
+  reads_column <- log2((reads_column + 1))#log2 normalize
+  #scale the column to all peaks averaged have a mean of 0 and a stdev of 1
+  peak_mx[,i] <- scale(reads_column)
+  colnames(peak_mx)[i] <- cluster
+  i = i + 1
+}
+#remove mitochondrial chromosome peaks  and scafold stuff
+peak_mx <- peak_mx[-grep("_",peak_mx$peak_mx),]
+peak_mx <- peak_mx[-grep("M",peak_mx$peak_mx),]
+```
+
+step 2. Select the most interesting peaks:
+    a. select highly variable peaks based on stdev
+    b. use SnapATAC's  inbuild diff peak analysis magic.
+
+Option a:
+calculate stvariance to select the top 2000 variable peaks:
+```{r}
+library(dplyr)
+peak_mx_a <- peak_mx
+peak_mx_a <- peak_mx_a %>% mutate(stDev = apply(.[,-1],1,sd))
+peak_mx_a <- peak_mx_a[order(peak_mx_a$stDev, decreasing = TRUE),]
+
+peak_mx500 <- peak_mx_a[1:2000,]
+peak_mx500 <- peak_mx500[,-ncol(peak_mx_a)]
+
+#remove differend peaks that share a summit, weird I know but appearently it hapens.
+peak_mx500 <- peak_mx500[!duplicated(peak_mx500$peak_mx),] 
+
+setwd(paste(home_dir,"/GimmeMaelstrom",sep=""))
+write.table(peak_mx500 ,file = "top_2000_peaks.txt",append=FALSE,
+		quote= FALSE, sep="\t", eol = "\n", na = "NA", dec = ".", 
+		row.names = FALSE, col.names = TRUE, qmethod = c("escape", "double"),
+		fileEncoding = "")
+```
+
+The second option is brewed up by the dark wizzard maintaining SnapATAC, skewing his magical spells and ramblings about what happens bellow. I ran it with multiple testing correction removed because my entire dataset counts as : "small clusters".
+
+Calculate differential regions using snapATAC function:
+"For a given group of cells Ci, we first look for their neighboring cells Cj (|Ci|=|Cj|) in the diffusion component space as “background” cells to compare to. If Ci accounts for more than half of the total cells, we use the remaining cells as local background. Next, we aggregate Ci and Cj to create two raw-count vectors as Vci and Vcj. We then perform differential analysis between Vci and Vcj using exact test as implemented in R package edgeR (v3.18.1) with 0.4 for human. P-value is then adjusted into False Discovery Rate (FDR) using Benjamini-Hochberg correction. Peaks with FDR less than 0.05 are selected as significant DARs.
+We recognize the limitation of this approach is that the statically significance may be under power for small clusters. For clusters that failed to identify significant differential elements, we rank the elements based on the enrichment pvalue and pick the top 200 peaks a representative elements for motif analysis."
+```{r}
+cluster_diff <- list() #generate a list to append columns to during the loop
+
+for (cluster in unique(x.sp@cluster)) {
+  DARs = findDAR(
+    obj=x.sp,
+    input.mat="pmat",
+    cluster.pos=cluster,
+    cluster.neg.method="knn",
+    test.method="exactTest",
+    bcv=0.4, #0.4 for human, 0.1 for mouse
+    seed.use=10
+  	)
+  DARs <- DARs[order(DARs$PValue),]
+  idy <- DARs[1:750,]
+  cluster_diff[[length(cluster_diff)+1]] <- row.names(idy)
+}
+
+diff_peaks <- peak_mx[unlist(cluster_diff, recursive = FALSE),]
+diff_peaks <- na.omit(diff_peaks)
+
+#remove differend peaks that share a summit, weird I know but appearently it hapens so I need to remove them.
+diff_peaks <- diff_peaks[!duplicated(diff_peaks$peak_mx),] 
+
+setwd(paste(home_dir,"/GimmeMaelstrom",sep=""))
+write.table(diff_peaks ,file = "diff_peaks.txt",append=FALSE,
+		quote= FALSE, sep="\t", eol = "\n", na = "NA", dec = ".", 
+		row.names = FALSE, col.names = TRUE, qmethod = c("escape", "double"),
+		fileEncoding = "")
+```
+
+Run GimmeMaelstrom using the peakfiles generated (ill limit cpu & mem usage in the future, it took me some time to run it from Rmarkdown) :
+```{bash}
+mkdir /home/jsmits/Ares_scATAC/GimmeMaelstrom/diff
+mkdir /home/jsmits/Ares_scATAC/GimmeMaelstrom/var
+
+nice -5 gimme maelstrom -N 24 /home/jsmits/Ares_scATAC/GimmeMaelstrom/diff_peaks.txt /home/jsmits/tools/genomes/GRCh38_fasta/Homo_sapiens.GRCh38.dna.primary_assembly.fa /home/jsmits/Ares_scATAC/GimmeMaelstrom/diff 
+
+nice -5 gimme maelstrom -N 24 /home/jsmits/Ares_scATAC/GimmeMaelstrom/top_2000_peaks.txt /home/jsmits/tools/genomes/GRCh38_fasta/Homo_sapiens.GRCh38.dna.primary_assembly.fa /home/jsmits/Ares_scATAC/GimmeMaelstrom/var
+```
+
+To be implemented:
+Cobine scATAC clusters with scRNAseq annotation/clustering
+Run ChromVAR on data using the GimmeMotifs database, to asses: "TF activity score" per cell (cluster). & Correlate this the scRNA expr?
