@@ -1,0 +1,3 @@
+The first two are ERD images of my database, which I could use a bit of help with.
+But the main problem is how I create 'big' text files, it's ugly and I want to know how you do it.
+Thanks
