@@ -2,4 +2,6 @@ Below is the Rmarkdown code file for my peak analysis following SnapATAC cell se
 I would like input on both code readability/functionality but also on the method to determinde interesting peaks for GimmeMaelstrom analysis.
 The output files for the dataset I ran it on (LSC compared with a PAX6 mutated cell line AN40) I have also attached.
 
+PS: I'll go through the code and problems during the meeting, you dont have to read it beforehand perse.
+
 Gr Jos
