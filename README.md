@@ -9,7 +9,7 @@
 | ~~07-10-2019~~                            | [Jirrine](./code_review/cocitation_dataframe.py)    | Sybren        	|
 | ~~21-10-2019~~                            | Siebren     	                                      | Simon         	|
 | ~~04-11-2019~~                            | ~~Quan~~     	                                      | ~~Jos~~        	|
-| ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | Siebren       	|
+| ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | [Siebren](https://github.com/vanheeringen-lab/genomepy/blob/master/docs/release_checklist.md)       	|
 | ~~02-12-2019~~  	                        | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
 | 16-12-2019      	                        | Jos                                                 | Sybren         	|
 | 20-01-2020      	                        | Quan                                                | Rebecca        	|
