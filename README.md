@@ -3,20 +3,20 @@
 ### Schedule
 | date        	                            | Code review 	                                      | Progress/Tech 	|
 |-------------------------------------------|-----------------------------------------------------|-----------------|
-| [~~02-09-2019~~](./archive/02-09-2019.md) |        	                                          |          	      |
-| [~~09-09-2019~~](./archive/09-09-2019.md) | Simon       	                                  | Jirrine       	|
+| [~~02-09-2019~~](./archive/02-09-2019.md) |        	                                            |          	      |
+| [~~09-09-2019~~](./archive/09-09-2019.md) | Simon       	                                      | Jirrine       	|
 | ~~23-09-2019~~                            | [Jos](./code_review/Snakefile)   	                  | Maarten       	|
 | ~~07-10-2019~~                            | [Jirrine](./code_review/cocitation_dataframe.py)    | Sybren        	|
-| ~~21-10-2019~~                            | Siebren     	                                  | Simon         	|
-| ~~04-11-2019~~                            | ~~Quan~~     	                                  | ~~Jos~~        	|
-| ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | [Siebren](https://github.com/vanheeringen-lab/genomepy/blob/master/docs/release_checklist.md)       	|
-| ~~02-12-2019~~  	                    | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
+| ~~21-10-2019~~                            | Siebren     	                                      | Simon         	|
+| ~~04-11-2019~~                            | ~~Quan~~     	                                      | ~~Jos~~        	|
+| ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | [Siebren](https://github.com/vanheeringen-lab/genomepy/blob/master/docs/release_checklist.md) |
+| ~~02-12-2019~~      	                    | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
 | ~~16-12-2019~~                            | Jos                                                 | Sybren         	|
-| 20-01-2020      	                    | Quan                                                | Rebecca        	|
-| 03-02-2020      	                    | Niels                                               | Maarten        	|
-| 17-02-2020      	                    | Marlien                                             | Jos           	|
-| 02-03-2020      	                    | Simon                                               | Siebren        	|
-| 16-03-2020      	                    | Sybren                                              | Niels         	|
+| ~~20-01-2020~~      	                    | Quan                                                | Rebecca        	|
+| 05-02-2020      	                    | Niels                                               | Maarten        	|
+| 19-02-2020      	                    | Marlien                                             | Jos           	|
+| 04-03-2020      	                    | Simon                                               | Siebren        	|
+| 18-03-2020      	                    | Sybren                                              | Niels         	|
 | 30-03-2020      	                    | Rebecca                                             | Simon         	|
 | 06-04-2020      	                    | Maarten                                             | Quan         	  |
 | 27-04-2020      	                    | Siebren                                             | Marlien        	|
