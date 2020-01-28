@@ -11,7 +11,7 @@
 | ~~04-11-2019~~                            | ~~Quan~~     	                                      | ~~Jos~~        	|
 | ~~18-11-2019~~                            | [Maarten](./code_review/tricks.py)                  | [Siebren](https://github.com/vanheeringen-lab/genomepy/blob/master/docs/release_checklist.md) |
 | ~~02-12-2019~~      	                    | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
-| ~~16-12-2019~~                            | [Jos](./code_review/scATACgimmeMaelstrom/scATAC_gimme_Maelstrom/scATAC_peak_analysis.Rmd)            | Sybren         	|
+| ~~16-12-2019~~                            | [Jos](./code_review/scATAC_gimme_Maelstrom/scATAC_peak_analysis.Rmd)            | Sybren         	|
 | ~~20-01-2020~~      	                    | Quan                                                | Rebecca        	|
 | 05-02-2020      	                    | Sybren                                                  | Niels         	|
 | 19-02-2020      	                    | Marlien                                             | Jos           	|
