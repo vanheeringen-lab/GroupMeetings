@@ -13,12 +13,12 @@
 | ~~02-12-2019~~      	                    | [Maarten](./code_review/narrowpeak_to_fasta)        | Quan          	|
 | ~~16-12-2019~~                            | [Jos](./code_review/scATAC_gimme_Maelstrom/scATAC_peak_analysis.Rmd)            | Sybren         	|
 | ~~20-01-2020~~      	                    | [Quan](./code_review/call_influence_score.py)       | Rebecca        	|
-| 05-02-2020      	                    | Sybren                                                  | Niels         	|
-| 19-02-2020      	                    | Marlien                                             | Jos           	|
+| ~~05-02-2020~~      	                    | Sybren                                                  | Niels         	|
+| 19-02-2020      	                    | Maarten                                             | Jos           	|
 | 04-03-2020      	                    | Simon                                               | Siebren        	|
 | 18-03-2020      	                    | Niels                                               | Sybren         	|
 | 30-03-2020      	                    | Rebecca                                             | Simon         	|
-| 06-04-2020      	                    | Maarten                                             | Quan         	  |
+| 06-04-2020      	                    | Marlien                                             | Quan         	  |
 | 27-04-2020      	                    | Siebren                                             | Marlien        	|
 
 
