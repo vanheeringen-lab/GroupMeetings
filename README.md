@@ -17,9 +17,9 @@
 | ~~19-02-2020~~      	                    |                                                     | Jos, [Maarten](./archive/PeakSQL.pdf)           	|
 | ~~04-03-2020~~      	                    | [Simon](./code_review/gene_annotation.py)                                               | Siebren        	|
 | ~~18-03-2020~~      	                    | Niels                                               | Sybren         	|
-| 30-03-2020      	                    | Rebecca                                             | Simon         	|
-| 06-04-2020      	                    | Marlien                                             | Quan         	  |
-| 27-04-2020      	                    | Siebren                                             | Marlien        	|
+| 01-04-2020      	                    | Rebecca                                             | Simon         	|
+| 08-04-2020      	                    | Marlien                                             | Quan         	  |
+| 297-04-2020      	                    | Siebren                                             | Marlien        	|
 
 
 ### Code review
