@@ -259,7 +259,6 @@ filter_genes <- apply(
     1, 
     function(x) length(x[x > 1]) >= 2
     )
-genes_expressed <- sum(filter_genes==TRUE)
 ```
 
 Now you stored the genes that are considered to be expressed in your dataset, in a vector called filter_genes.
