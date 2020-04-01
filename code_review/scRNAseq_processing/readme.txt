@@ -1,3 +1,3 @@
 With these files I want to give an idea on how I process my scRNA-seq data. I tried to make the workflow more generalized/automized by making use of the 2 included scripts for instance. Next to that I included an R Markdown file in which I perform the first steps, so building and filtering of the dataset (and checking for confounders, normalization, identifying highly variable genes, dimensionality reduction etc, but I did not include that here). 
 
-Since it is the first time that I wrote scripts (especially in bash), I would like your input on readability and functionality and how to make my workflow even more/better generalized/automized.
+Since it is the first time that I wrote scripts (especially in bash), I would like your input on readability and functionality and how to make my workflow even more/better generalized and automized.
