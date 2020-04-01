@@ -1,0 +1,326 @@
+---
+title: "Dataset with Velocity preparations"
+author: "Rebecca Snabel"
+date: "March 30, 2020"
+output: html_document
+---
+
+```{r "setup"}
+knitr::opts_knit$set(root.dir = normalizePath("/home/snabel/scrna/scripts/outputtest/"))
+```
+
+```{r, include = FALSE}
+# Loading the important repositories #
+require("devtools")
+library(ggplot2)
+library(SingleCellExperiment)
+library(scater)
+library(dplyr)
+library(tidyr)
+library(mvoutlier)
+library(limma)
+library(knitr)
+library(Seurat)
+library(RColorBrewer)
+library(plot3D)
+source("/home/snabel/R-scripts/scRNA-seq/read_kb_dataset.R")
+source("/home/snabel/R-scripts/scRNA-seq/qc_ercc_384plot.R")
+source("/home/snabel/R-scripts/scRNA-seq/qc_umis_384plot.R")
+```
+
+## Cleaning up the count table
+
+----------------------------------------------------------------------
+
+### Creating the SingleCellExperiment object
+
+The counts table is loaded along with the metadata of the cells within an Scater usable object. Scater will be used to look into the quality of the data and to help with filtering out bad cells or genes.
+
+#### Loading the count table
+
+```{r loading dataset, echo = TRUE}
+# Loading spliced and unspliced count tables:
+spliced.data.CM = read_kb_counts("./", "spliced")
+unspliced.data.CM = read_kb_counts("./", "unspliced")
+
+# The default data.CM will be the spliced dataset 
+data.CM <- spliced.data.CM
+```
+
+```{r}
+# Check if the spliced and unspliced dataset are consisting of the same ordering of cells:
+identical(colnames(spliced.data.CM), colnames(unspliced.data.CM))
+# Percentage of reads unspliced
+sum(unspliced.data.CM) / (sum(spliced.data.CM) + sum(unspliced.data.CM))
+```
+
+A filtering specific to this dataset: removal of d28 cells, which were taken along on this sequencing run:
+
+```{r filtering out d28 entries}
+# filter d28 out of the dataset
+data.CM <- data.CM[, !grepl("d28-", colnames(data.CM)) == TRUE]
+
+spliced.data.CM <- spliced.data.CM[,!grepl("d28-", colnames(spliced.data.CM)) == TRUE]
+unspliced.data.CM <- unspliced.data.CM[,!grepl("d28-", colnames(unspliced.data.CM)) == TRUE]
+
+# no. of plates in the dataset:
+length(colnames(spliced.data.CM))/384
+
+```
+
+### Phenotable preparations
+
+```{r phenotable}
+## Setting up the phenotable ##
+phenodata <- data.frame(row.names=colnames(data.CM))
+phenodata$names <- row.names(phenodata)
+phenodata <- separate(phenodata, col = "names", into = c("Timepoint", "Library", "Library2", "Well"), sep = "_")
+
+#phenodata <- read.table("./pheno.txt", header = T , sep = "\t", as.is = F, row.names = "Sample")
+phenodata$Library <- as.factor(phenodata$Library)
+```
+
+```{r import FACS measurements}
+## Import into phenotable the values for each reporter ##
+phenodata$cellidunique <- paste(phenodata$Library, phenodata$Well, sep = "_" )
+
+# Import the index sorting values from the FACS 
+reporterdf <- read.csv("/home/snabel/scrna/CMdiff_d7-14_alldays/data/20190709_FACS_reportervalues.csv", header = TRUE)
+reporter_matched <- reporterdf[reporterdf$cellidunique %in% phenodata$cellidunique,]
+reporter_matched$cellidunique <- as.character(reporter_matched$cellidunique)
+reporter_matched <- reporter_matched[,c(2:4)]
+colnames(reporter_matched) <- c("GFP","mCherry","cellidunique")
+
+# Make reporter entries in the phenodata file
+tmp <- merge(x = phenodata, y = reporter_matched, by.x = c("cellidunique") , by.y = c("cellidunique"), all.x = TRUE)
+rownames(tmp) <- paste(tmp$Timepoint, tmp$Library, tmp$Library2, tmp$Well, sep = "_")
+phenodata <- tmp
+rm(tmp)
+
+write.csv(phenodata, "20200317_phenodata_kbordered.csv")
+```
+
+## Plate quality control
+
+```{r plate QC}
+## Running plate QC: are there certain patterns?
+
+# Make a list of cell names compatable with the excel file: plate#_A1, plate#_A2 etc.
+plate_order <- read.table("/home/snabel/scrna/barcode_384.tab", sep = "\t", col.names = c("well","barcode"))
+
+# Make a vector with all plate numbers
+platenrs <- unique(phenodata$Library)
+
+pdf("PlateDiag_lndscp.pdf", paper = "USr")
+# settings for the plate diagnostics pdf 
+par(mfrow=c(2,2), mar = c(5,4,4,2) + 0.1, cex.main = 1)
+# iterate over all plates
+for (plate in platenrs){
+  # use the order of cells from te barcode file (this is A1, A2, A3, etc to P24)
+  primer_order <- paste(plate, plate_order$well, sep="_")
+  # phenodata contains same cellid entry + rownames as used in dataset
+  cells_order <- rownames(phenodata[match(primer_order,phenodata$cellidunique),])
+  # match dataset cell order with wells in the visualization
+  tmp <- as.matrix(data.CM[,cells_order])
+  tp <- unique(phenodata$Timepoint[phenodata$Library == plate])
+  # functions to generate plate diagnostic figures
+  QC_umis_384plot(tmp, paste(tp, plate, "UMI_QC", sep = "_"))
+  QC_ERCC_384plot(tmp[grep("^ERCC-", rownames(data.CM)),], paste(tp, plate, "ERCC_QC", sep = "_"))
+  rm(tmp)
+}
+dev.off()
+```
+
+## Matching phenodata with the dataset ordering
+
+```{r matching phenotable, echo = FALSE}
+# Only take the entries that are matching with the count table entries:
+pheno_matched <- phenodata[rownames(phenodata) %in% colnames(data.CM),]
+pheno_ordered <- pheno_matched[match(colnames(data.CM),rownames(pheno_matched)),]
+```
+
+```{r build SCE}
+# df -> matrix -> SCE + phenodata 
+count_matrix <- as.matrix(data.CM)
+
+sce <- SingleCellExperiment(assays = list(counts = count_matrix), colData = pheno_ordered, rowData = rownames(count_matrix))
+```
+
+## Cleaning the expression matrix
+
+```{r}
+# Adding spike-in information:
+isSpike(sce, "ERCC") <- grepl("^ERCC-", rownames(sce))
+isSpike(sce, "MT") <- grepl("^MT-", rownames(sce))
+
+# Calculate the quality metrics:
+sce <- calculateQCMetrics(
+  sce, feature_controls = list(
+    ERCC = isSpike(sce, "ERCC"), 
+    MT = isSpike(sce, "MT")
+    )
+  )
+```
+
+Genes that had less than `r amount_cells_expr` cells with an expression of less than `r gene_tresh`.
+For the genes in this dataset genes that were removed `r table(keep_feature)` genes were kept.
+Spikes: `r spikeNames(sce)` were saved in the dataset and used for quality metrics calculations.
+
+```{r}
+# Arbitrary thresholds:
+# Looking at the total number of RNA molecules per sample
+# UMI counts were used for this experiment
+total_counts_tresh = 2000
+hist(sce$total_counts, breaks = 100)
+abline(v = total_counts_tresh, col = "red")
+
+# Looking at the amount of unique genes per sample
+# This is the amount with ERCC included.
+total_feat_tresh = 1000
+hist(sce$total_features_by_counts, breaks = 100)
+abline(v= total_feat_tresh, col = "red")
+
+```
+
+Histogram showing the total amounts of counts (x-axis) per proportion of cells (each bar). Red line at: `r total_counts_tresh` counts. 
+Histogram showing the total amounts of genes (features) per proportion of cells. Red line at: `r total_feat_tresh` genes.
+
+## Plotting spike-in data
+
+```{r}
+# label type of the cells
+lab_col = "Library"
+
+plotColData(sce,
+            x = "total_features_by_counts", 
+            y = "pct_counts_MT", colour = lab_col)
+
+plotColData(sce,
+            x = "total_features_by_counts", 
+            y = "pct_counts_ERCC", colour = lab_col)
+
+multiplot(
+  plotColData(sce, y="total_counts", x="Library"),
+  plotColData(sce, y="total_features_by_counts", x="Library"),
+  plotColData(sce, y="pct_counts_ERCC", x="Library"),
+  plotColData(sce, y="pct_counts_MT", x="Library"),
+  cols=2)
+
+```
+
+Plotting the percentages of the spike-ins against the total amount of genes, each dot represents a cell. Color labelled on `r lab_col`.
+
+These plots show the percentage of spike-ins against the total amount of reads that are found in each cell. A higher percentage of spike-in indicates a lower amount of endogenous genes found in the cell or in case of mitochondrial genes, of a cell that was apoptotic. Also cells that are smaller will have relatively more spike-in allocated reads, therefore it does not only indicate unhealthy cells.
+
+## Filtering of death or unhealthy cells 
+
+```{r}
+## Manual filtering of the cells
+
+# Our samples (hESC-derived CMs) should contain cells of approximatly the same size. 
+# Cardiomyocytes are known to contain relatively many mitochondria, therefore a relatively high threshold is allowed.
+
+# Filter library-size and the total amount of genes on the thresholds shown above in histogram.
+filter_by_expr_features <- sce$total_features_by_counts >= total_feat_tresh
+filter_by_total_counts <- sce$total_counts >= total_counts_tresh
+filter_by_ercc <- sce$pct_counts_ERCC < 20
+filter_by_mt <- sce$pct_counts_MT < 40
+
+sce$use <- (filter_by_expr_features 
+         # 805 cells left with enough genes
+         & 
+           filter_by_total_counts 
+         # 796 cells left with enough counts in total
+         &
+           filter_by_ercc 
+         # 796 cells left with enough endogenous RNA counts
+         & 
+           filter_by_mt)
+         # 790 cells left with more percentage of MT taking up the genes of 40%
+
+# filters 351 cells out of the dataset
+table(filter_by_expr_features)
+table(filter_by_total_counts)
+table(filter_by_ercc)
+table(filter_by_mt)
+
+# Result of manual filtering with set tresholds:
+table(sce$use)
+```
+
+
+```{r}
+#---------------------------
+## Filtering the genes
+#---------------------------
+# You do the filtering of the genes after selecting the healthy cells, because some genes might only be detected in poor quality cells
+# The reads consumed by the top 50 expressed genes:
+plotHighestExprs(sce)
+
+# Detectable expression: if at least 2 cells contain more than 1 transcript of the gene.
+filter_genes <- apply(
+    counts(sce), 
+    1, 
+    function(x) length(x[x > 1]) >= 2
+    )
+genes_expressed <- sum(filter_genes==TRUE)
+```
+
+
+Now you stored the genes that are considered to be expressed in your dataset, in a vector called filter_genes.
+
+The next step is to select within the dataset the only information you want to keep for further analysis:
+- Selecting only the healthy cells according to what you choose to create thresholds (either manually or with the 3 MADs method etc),
+- Selecting only the genes considered to be expressed.
+
+```{r create filtered dataset}
+# Store the genes that are considered expressed.
+rowData(sce)$use <- filter_genes
+
+# Now the quality check-passing cells and genes are stored in the SCE-object in $use selection of the counts table. 
+dim(sce)
+dim(sce[rowData(sce)$use, colData(sce)$use])
+
+# Create the quality-checked dataset:
+sce_filt <- sce[rowData(sce)$use, colData(sce)$use]
+```
+
+```{r filtered dataset: compare before/after filtering}
+
+#saveRDS(sce, file = "qc_counts.rds")
+
+pdf("Histograms_before+aftercellsFiltering.pdf")
+par(mfrow=c(2,2))
+hist(sce$total_counts, breaks = 100)
+abline(v = total_counts_tresh, col = "red")
+
+hist(sce$total_features_by_counts, breaks = 100)
+abline(v= total_feat_tresh, col = "red")
+
+hist(sce_filt$total_counts, breaks = 100)
+abline(v = total_counts_tresh, col = "red")
+
+hist(sce_filt$total_features_by_counts, breaks = 100)
+abline(v= total_feat_tresh, col = "red")
+dev.off()
+
+pdf("MT+ERCC_before+aftercellsFiltering.pdf")
+par(mfrow=c(2,2))
+plotColData(sce,
+            x = "total_features_by_counts", 
+            y = "pct_counts_MT", colour = lab_col)
+
+plotColData(sce,
+            x = "total_features_by_counts", 
+            y = "pct_counts_ERCC", colour = lab_col)
+
+plotColData(sce_filt,
+            x = "total_features_by_counts", 
+            y = "pct_counts_MT", colour = lab_col)
+
+plotColData(sce_filt,
+            x = "total_features_by_counts", 
+            y = "pct_counts_ERCC", colour = lab_col)
+dev.off()
+
+``` 
