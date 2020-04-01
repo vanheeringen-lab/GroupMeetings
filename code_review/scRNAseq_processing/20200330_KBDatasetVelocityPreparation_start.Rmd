@@ -133,7 +133,7 @@ dev.off()
 
 ## Matching phenodata with the dataset ordering
 
-```{r matching phenotable, echo = FALSE}
+```{r matching phenotable}
 # Only take the entries that are matching with the count table entries:
 pheno_matched <- phenodata[rownames(phenodata) %in% colnames(data.CM),]
 pheno_ordered <- pheno_matched[match(colnames(data.CM),rownames(pheno_matched)),]
@@ -162,8 +162,6 @@ sce <- calculateQCMetrics(
   )
 ```
 
-Genes that had less than `r amount_cells_expr` cells with an expression of less than `r gene_tresh`.
-For the genes in this dataset genes that were removed `r table(keep_feature)` genes were kept.
 Spikes: `r spikeNames(sce)` were saved in the dataset and used for quality metrics calculations.
 
 ```{r}
@@ -250,9 +248,7 @@ table(sce$use)
 
 
 ```{r}
-#---------------------------
 ## Filtering the genes
-#---------------------------
 # You do the filtering of the genes after selecting the healthy cells, because some genes might only be detected in poor quality cells
 # The reads consumed by the top 50 expressed genes:
 plotHighestExprs(sce)
@@ -265,7 +261,6 @@ filter_genes <- apply(
     )
 genes_expressed <- sum(filter_genes==TRUE)
 ```
-
 
 Now you stored the genes that are considered to be expressed in your dataset, in a vector called filter_genes.
 
