@@ -4,12 +4,12 @@
 | date        	                            | Code review 	                                  | Progress/Tech 	|
 |-------------------------------------------|-----------------------------------------------------|-----------------|
 | 29-04-2020      	                    | Siebren                                             | Marlien        	|
-| 13-05-2020 | Niels	| Sybren |
+| 13-05-2020 | 	| Sybren, Niels |
 | 27-05-2020 | Quan	| Marlien |
 | 10-06-2020 | Siebren	| Simon |
 | 24-06-2020 | Maarten	| Jos |
 | 02-09-2020 | Sybren	| Rebecca |
-| 16-09-2020 | Simon	| Niels |
+| 16-09-2020 | Simon	| PLS_FILL_ME |
 | 30-09-2020 | Jos	| Maarten |
 | 14-10-2020 | Rebecca	| Siebren |
 
