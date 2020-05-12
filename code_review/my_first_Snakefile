@@ -1,0 +1,82 @@
+SAMPLES = ['ERR523111']
+READS = ['1', '2']
+OUTPUT_DIR = 'results'
+ADAPTER_KIT = 'nextera'
+
+rule fastqc_raw:
+    """ The first fastqc done on raw sequence data (fastq format),
+    returns a fastqc-report zip and html.
+    """
+
+	input:
+		expand("data/raw/{sample}_{read}.fastq.gz", sample=SAMPLES, read=READS)
+	output:
+		expand("{output_dir}/fastqc/raw/{sample}_{read}_fastqc.zip",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+		expand("{output_dir}/fastqc/raw/{sample}_{read}_fastqc.html",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS)
+	shell:
+		"fastqc {input} -o {OUTPUT_DIR}/fastqc/raw"
+
+rule trim_galore:
+	""" Runs trim_galore on the raw sequence data (fastq format) 
+    and returns along with the trimmed sequences a report.
+
+	Requires the rule fastqc_raw to be ran first.
+	"""
+
+	input:
+		# Added the fastqc results, to force fastqc_raw to be ran first.
+		fastqc=expand("{output_dir}/fastqc/raw/{sample}_{read}_fastqc.zip",
+                      output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+		samples=expand("data/raw/{sample}_{read}.fastq.gz", 
+                       sample=SAMPLES, read=READS)
+	output:
+		expand("{output_dir}/trim_galore/{sample}_{read}.fastq.gz_trimming_report.txt",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+		expand("{output_dir}/trim_galore/{sample}_{read}_trimmed.fq.gz",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS)
+	shell:
+		"trim_galore --{ADAPTER_KIT} -o {OUTPUT_DIR}/trim_galore {input.samples}"
+
+rule fastqc_trimmed:
+	""" Run fastqc on the trimmed sequences, returns a fastqc-report zip and html.
+
+	Requires the rule trim_galore to be ran first.
+	"""
+
+	input:
+		expand("{output_dir}/trim_galore/{sample}_{read}_trimmed.fq.gz",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS)
+	output:
+	    expand("{output_dir}/fastqc/trimmed/{sample}_{read}_trimmed_fastqc.zip",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+	    expand("{output_dir}/fastqc/trimmed/{sample}_{read}_trimmed_fastqc.html",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS)
+	shell:
+		"fastqc {input} -o {OUTPUT_DIR}/fastqc/trimmed/"
+		
+rule multiqc:
+	""" Runs MultiQC on the directory, combining the results from the rules 
+	fastqc_raw and fastqc_trimmed into a html report.
+
+	Requires the rules fastqc_raw and fastqc_trimmed to be ran first.
+	"""
+
+	input:
+		# fastq_raw results
+	    expand("{output_dir}/fastqc/raw/{sample}_{read}_fastqc.zip",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+		expand("{output_dir}/fastqc/raw/{sample}_{read}_fastqc.html",
+               	output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+		
+		#fastq_trim results
+		expand("{output_dir}/fastqc/trimmed/{sample}_{read}_trimmed_fastqc.zip",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS),
+		expand("{output_dir}/fastqc/trimmed/{sample}_{read}_trimmed_fastqc.html",
+               output_dir=OUTPUT_DIR, sample=SAMPLES, read=READS)
+	output:
+		"data/multiqc/multiqc_data.zip",
+		"data/multiqc/multiqc_report.html"
+	shell:
+		"multiqc . -z -o data/multiqc/"
