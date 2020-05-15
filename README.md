@@ -9,7 +9,7 @@
 | 10-06-2020 | Siebren	| Simon |
 | 24-06-2020 | 	| Marlien |
 | 02-09-2020 | Sybren	| Rebecca |
-| 16-09-2020 | Simon	| Maarten |
+| 16-09-2020 | Simon, Maarten	|  |
 | 30-09-2020 | Jos	| Maarten |
 | 14-10-2020 | Rebecca	| Siebren |
 
