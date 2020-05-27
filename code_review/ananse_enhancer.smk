@@ -65,7 +65,7 @@ rule sort_bdg_p300:
     shell:
         "sort -k1,1 -k2,2n {input.bdgfile} > {output.sortbdgfile}"
 
-rule sort_bdg_h2k27ac:
+rule sort_bdg_h3k27ac:
     """
     Sort bdg file from macs2.
     """
