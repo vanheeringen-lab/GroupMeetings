@@ -6,6 +6,7 @@
 #      - 'disease_control_disease'
 #      - 'stage_2_1'
 #      - 'stage_all_1'
+#      - 'stage'  # if the group only contains 2 factors. not used anymore as is does not specify the reference group
 #
 # these must be checked (the columns must be present in the `samples.tsv` file, and the factors must occur within the columns)
 # the designs must be parsed (batch effects and specific modules to be extracted)
