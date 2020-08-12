@@ -16,3 +16,8 @@
 | ~~18-03-2020~~      	                    | Niels                                               | Sybren         	|
 | ~~01-04-2020~~      	                    | [Rebecca](../code_review/scRNAseq_processing/)           | Simon         	|
 | ~~15-04-2020~~      	                    | [Marlien](../code_review/codereview_Marlien.smk)         | Quan         	  |
+| ~~29-04-2020~~      	                    | ~~Siebren~~                                             | ~~Marlien~~        	|
+| ~~13-05-2020~~                            | 	                                                    | ~~Sybren~~, ~~Niels~~ |
+| ~~27-05-2020~~                                | ~~Quan~~	                                                | ~~Jos~~ |
+| ~~10-06-2020~~                                | ~~Siebren~~	                                              | ~~Simon~~ |
+| ~~24-06-2020~~                                | 	                                                        | ~~Marlien~~ |
