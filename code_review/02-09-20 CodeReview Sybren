@@ -1,0 +1,61 @@
+def Demultiplex(flowcell, niceness, forced=false):
+    """ Demultiplexes the supplied BCL file (flowcell)this uses the script bcl2fastq.
+
+        Keywords arguments:
+        flowcell -- A Flowcell object, extracted from a database with SQLalchemy.
+        niceness -- The niceness BCL2FASTQ will use.
+        forced -- A boolean, normaly false. True if re-demultiplexing
+    """
+
+    # Getting some data from the flowcell.
+    bcl_dir = flowcell.get_bcl_location()
+    output_dir = flowcell.get_fastq_location()
+    mail_recipients = get_who2email(flowcell)
+
+    # First check if it is a forced demultiplex, if not check if there are already fastq files from this flowcell.
+    if forced or not check_for_fastqs(flowcell):
+        # Send mail that flowcell has started demultiplexing.
+        for recipient in mail_recipients:
+            subject = f"{flowcell.name} has been forced to re-demultiplex" \
+                      if forced else \
+                      f"{flowcell.name} has started demultiplexing"
+
+            message = (f"Hello {recipient.fullname},\n\n" +
+                       (f"The flowcell {flowcell.name} has been forced to re-demultiplex.\n{forced_message}\n\n"
+                       if forced else
+                       f"The flowcell {flowcell.name} has started demultiplexing.\n\n" ) +
+                       f"This is an automatically generated mail, but feel free to respond to it.")
+
+            send_mail(message, subject, recipient)
+
+        # Make FASTQ dir if it doesn't exist
+        if not os.path.isdir(output_dir):
+            os.mkdir(output_dir)
+
+        # Now the demultiplexing starts.
+        # 1) MAKE SAMPLESHEET
+        # Get path of samplesheet and make samplesheet
+        sample_sheet = f"{output_dir}/SampleSheet.csv"
+        ms.make_samplesheet(flowcell.name, output_dir)
+
+        # 2) DEMULTIPLEX FLOWCELL
+        command = f"nice -n {niceness}\
+                    bcl2fastq --no-lane-splitting -R {bcl_dir}\
+                    -o {output_dir} --interop-dir {output_dir}/InterOp/\
+                    --sample-sheet {sample_sheet}"
+
+        demul_process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        demul_process.wait()  # Wait on subprocess to be finished.
+
+        # 3) SORT SAMPLES INTO SUBDIRS
+        sf.sort_flowcell(flowcell, output_dir)  # Sort all samples into directories named after their owners.
+
+        # Send mail that flowcell is done demultiplexing
+        for recipient in mail_recipients:
+            subject = f"{flowcell.name} is done demultiplexing"
+            message = f"Hello {recipient.fullname},\n\n" + \
+                      f"The flowcell {flowcell.name} is done demultiplexing and can be found at:\n" \
+                      f"{output_dir}\n\n" + \
+                      f"This is an automatically generated mail, but feel free to respond to it."
+
+            send_mail(message, subject, recipient)
