@@ -3,10 +3,10 @@
 ### Schedule
 | date        	                            | Code review 	                                  | Progress/Tech 	|
 |-------------------------------------------|-------------------------------------------------|-----------------|
-| 02-09-2020                                | Sybren	                                        | Maarten         |
-| 16-09-2020                                | Simon, Maarten	                                |                 |
-| 30-09-2020                                | Jos	                                            | Rebecca         |
-| 14-10-2020                                | Rebecca	                                        | Siebren         |
+| 28-10-2020                                | 	                                              | Tilman & Jos    |
+| 11-11-2020                                | Siebren                                         | Janou           |
+| 25-11-2020                                | Maarten	                                      | Jori            |
+| 09-12-2020                                | Sybren	                                      | Simon           |
 
 
 ### Code review
