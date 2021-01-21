@@ -3,10 +3,10 @@
 ### Schedule
 | date        	                            | Code review 	                                  | Progress/Tech 	|
 |-------------------------------------------|-------------------------------------------------|-----------------|
-| 28-01-2021                                | Jos                                             | Rebecca         |
-| 11-02-2021                                | Tilman                                          | Chana           |
-| 25-03-2021                                | Janou                                           | Sybren          |
-| 11-03-2021                                | Simon	                                          | Angela          |
+| 27-01-2021                                | Jos                                             | Rebecca         |
+| 10-02-2021                                | Tilman                                          | Chana           |
+| 24-03-2021                                | Janou                                           | Sybren          |
+| 10-03-2021                                | Simon	                                          | Angela          |
 
 
 ### Code review
