@@ -1,0 +1,57 @@
+ATAC_coverage_table = {}
+ATAC_Deseq2 = {}
+
+for file in ["ATAC_summits", "promoter"]:
+    ATAC_summit_counts = pd.read_table(
+        f"{output_dir}/ATAC_processing/{file}_window_coverage_table.txt", comment="#"
+    )
+    ATAC_summit_counts.rename(columns={"Unnamed: 0": "loc"}, inplace=True)
+    ATAC_summit_counts.to_csv(
+        f"{output_dir}/ATAC_processing/{file}_count_matrix.tsv",
+        sep="\t",
+        header=True,
+        index=False,
+    )
+
+    # merge replica's
+    ATAC_summit_counts["KC_counts_aggregated"] = ATAC_summit_counts.iloc[
+        :, [1, 2, 3, 4, 5, 6]
+    ].sum(axis=1)
+    ATAC_summit_counts["LSC_counts_aggregated"] = ATAC_summit_counts.iloc[
+        :, [7, 8, 9, 10]
+    ].sum(axis=1)
+
+    ATAC_summit_counts["KC_counts_aggregated"] = (
+        ATAC_summit_counts["KC_counts_aggregated"] + 1
+    )
+    ATAC_summit_counts["LSC_counts_aggregated"] = (
+        ATAC_summit_counts["LSC_counts_aggregated"] + 1
+    )
+
+    ATAC_summit_counts[
+        ["KC_ATAC_qnorm", "LSC_ATAC_qnorm"]
+    ] = coverage_table_normalization(
+        ATAC_summit_counts[["KC_counts_aggregated", "LSC_counts_aggregated"]]
+    )
+
+    ATAC_summit_qnorm = ATAC_summit_counts[["loc", "KC_ATAC_qnorm", "LSC_ATAC_qnorm"]]
+    ATAC_summit_qnorm = ATAC_summit_counts[["loc", "KC_ATAC_qnorm", "LSC_ATAC_qnorm"]]
+    ATAC_summit_qnorm = ATAC_summit_qnorm.rename(columns={"loc": "ATAC_sum_loc",})
+
+    ATAC_coverage_table[file] = ATAC_summit_qnorm
+
+    # Run deseq2 on the ATAC counts
+    !Rscript --vanilla /ceph/rimlsfnwi/data/moldevbio/zhou/jsmits/Epi_fate_specifiers/analysis/RunDeseq2.R {output_dir}/ATAC_processing/{file}_count_matrix.tsv /ceph/rimlsfnwi/data/moldevbio/zhou/jsmits/Epi_fate_specifiers/analysis/ATAC_sample_file.csv {output_dir}/ATAC_processing/diff_{file}.csv
+
+    ATAC_summit_diff = pd.read_table(
+        f"{output_dir}/ATAC_processing/diff_{file}.csv", comment="#", sep=",",
+    )
+    ATAC_summit_diff = ATAC_summit_diff.drop("Unnamed: 0", axis=1)
+    ATAC_summit_diff = ATAC_summit_diff.rename(
+        columns={
+            "baseMean": "ATAC_baseMean",
+            "log2FoldChange": "ATAC_log2FC",
+            "padj": "ATAC_padj",
+        }
+    )
+    ATAC_Deseq2[file] = ATAC_summit_diff

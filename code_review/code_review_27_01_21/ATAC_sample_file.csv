@@ -1,0 +1,13 @@
+samples,rep,condition
+GRCh38.p13-Dombi-23_ATAC_1.samtools-coordinate,1,KC
+GRCh38.p13-Dombi-23_ATAC_2.samtools-coordinate,2,KC
+GRCh38.p13-PKC19_ATAC_1.samtools-coordinate,3,KC
+GRCh38.p13-PKC19_ATAC_2.samtools-coordinate,4,KC
+GRCh38.p13-PKC19_ATAC_3.samtools-coordinate,5,KC
+GRCh38.p13-PKC19_ATAC_4.samtools-coordinate,6,KC
+GRCh38.p13-PRIM_LSC_ATAC_1.samtools-coordinate,1,LSC
+GRCh38.p13-PRIM_LSC_ATAC_2.samtools-coordinate,2,LSC
+GRCh38.p13-PRIM_LSC_ATAC_3.samtools-coordinate,3,LSC
+GRCh38.p13-PRIM_LSC_ATAC_4.samtools-coordinate,4,LSC
+GRCh38.p13-GSM4728093.samtools-coordinate,5,LSC
+GRCh38.p13-GSM4728094.samtools-coordinate,6,LSC
