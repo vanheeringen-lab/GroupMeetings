@@ -21,3 +21,7 @@
 | ~~27-05-2020~~                                | ~~Quan~~	                                                | ~~Jos~~ |
 | ~~10-06-2020~~                                | ~~Siebren~~	                                              | ~~Simon~~ |
 | ~~24-06-2020~~                                | 	                                                        | ~~Marlien~~ |
+| 27-01-2021                                | Jos                                             | Rebecca         |
+| 10-02-2021                                | Tilman                                          | (Rebecca)       |
+| 24-02-2021                                | Janou                                           | Sybren          |
+| 10-03-2021                                | Simon	                                          | Angela          |

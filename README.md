@@ -1,23 +1,25 @@
 # Group meetings of Computational MolDev
 
 ### Schedule
-| date        	                            | Code review 	                                  | Progress/Tech 	|
+| date        	                            | Spot 1 	                                      | Spot 2      	|
 |-------------------------------------------|-------------------------------------------------|-----------------|
-| 27-01-2021                                | Jos                                             | Rebecca         |
-| 10-02-2021                                | Tilman                                          | (Rebecca)       |
-| 24-02-2021                                | Janou                                           | Sybren          |
-| 10-03-2021                                | Simon	                                          | Angela          |
+| 07-04-2021                                | Jori                                            | Tilman          |
+| 21-04-2021                                | Siebren                                         | Literature      |
+| 05-05-2021                                | Janou                                           | Okan            |
+| 19-05-2021                                | Sybren	                                      | Literature      |
+| 02-06-2021                                | Rebecca	                                      | Maarten         |
+| 16-06-2021                                | Jos	                                          | Literature      |
 
 
-### Code review
-Prepare a piece of code which you think is representative/interesting or solves a difficult problem.
-The rest of the group will give (constructive!) feedback on style/design (total +/- 30 minutes). The 
-person that prepares a piece of code is also responsible for bringing the beamer and **cookies**.
+### Own interpretation
 
-### Progress/Tech
-Either:
-* Presentation about your current work, with focus on computational problems/difficulties. The aim
-of this presentation is that others can help you with their expertise.
-* Present about a useful package/module/feature/habit (e.g. git, anaconda, etc...)
+- Been working on something that is interesting for other group members? 
+- Found something complicated but you solved it? 
+- Read an interesting paper/blogpost?
+- Important update to a programming language/package?
+- Share your progress?
+- Want your code reviewed?
+- Discovered a useful package/module/feature/habit?
+- Etc...
 
-Preferably does not take more than 30 minutes including questions.
+Feel free to choose whatever you like to present!
