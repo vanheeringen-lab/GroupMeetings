@@ -4,14 +4,14 @@
 
 | date        	                            | Spot 1 	                                          | Spot 2          |
 |-------------------------------------------|---------------------------------------------------|-----------------|
-| 15-09-2021                                | mbconda/scratch/ceph full                         | Tilman          |
-| 29-09-2021                                | Siebren                                           | Literature      |
-| 13-10-2021                                | Janou                                             | -               |
-| 27-10-2021                                | Okan                                              | Maarten         |
-| 10-11-2021                                | Jos	                                              | Literature      |
-| 24-11-2021                                | Sybren	                                          | Rebecca         |
-| 08-12-2021                                | Tilman	                                          | Literature      |
-
+| 19-01-2022                                | Julian                                            | Janou           |
+| 02-02-2022                                | Siebren                                           | Literature      |
+| 16-02-2022                                | Maarten                                           | Jos             |
+| 02-03-2022                                | Tessa                                             | Literature      |
+| 16-03-2022                                | Rebecca	                                          | Justin          |
+| 30-03-2022                                | Chana	                                            | Literature      |
+| 13-04-2022                                | Tilman	                                          | Sybren          |
+| 27-04-2022                                | Simon	                                            | Literature      |
 
 ### Own interpretation
 
