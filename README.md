@@ -5,8 +5,8 @@
 | date        	                            | Spot 1 	                                          | Spot 2          |
 |-------------------------------------------|---------------------------------------------------|-----------------|
 | 19-01-2022                                | Julian                                            | Jos             |
-| 02-02-2022                                | Siebren                                           | Literature      |
-| 16-02-2022                                | Maarten                                           | Janou           |
+| 02-02-2022                                | Maarten                                           | Literature      |
+| 16-02-2022                                | Siebren                                           | Janou           |
 | 02-03-2022                                | Tessa                                             | Literature      |
 | 16-03-2022                                | Rebecca	                                          | Justin          |
 | 30-03-2022                                | Chana	                                            | Literature      |
