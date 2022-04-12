@@ -11,7 +11,7 @@
 | 16-03-2022                                | Rebecca	                                          | Justin                  |
 | 30-03-2022                                | Chana	                                            | Literature              |
 | 13-04-2022                                | Tilman	                                          | Sybren                  |
-| 27-04-2022                                | Simon	                                            | Literature              |
+| 11-05-2022                                | Simon	                                            | Literature              |
 
 ### Own interpretation
 
